@@ -5,7 +5,15 @@
   "description": "Meow meow meow",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "build:dev": "tsc --build tsconfig.dev.json",
+    "build:prod": "tsc --build tsconfig.prod.json",
+    "build:prod:clean": "tsc --build tsconfig.prod.json --clean",
+    "build:test": "tsc --build tsconfig.test.json",
+    "build:test:clean": "tsc --build tsconfig.test.json --clean",
+    "build": "tsc",
+    "prebuild": "rimraf node_modules/@cuaklabs",
+    "prebuild:prod": "npm run build:prod:clean",
+    "prebuild:test": "npm run build:test:clean"
   },
   "repository": {
     "type": "git",
@@ -16,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/cuaklabs/nestjs-meow/issues"
   },
-  "homepage": "https://github.com/cuaklabs/nestjs-meow#readme"
+  "homepage": "https://github.com/cuaklabs/nestjs-meow#readme",
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.4"
+  }
 }

@@ -1,0 +1,13 @@
+# npm installed packages
+node_modules/
+
+# Typescript compiled files
+dist/
+
+packages/**/*.d.ts
+packages/**/*.js
+
+# TypeScript cache
+*.tsbuildinfo
+
+/tmp
