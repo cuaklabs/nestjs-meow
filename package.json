@@ -11,6 +11,8 @@
     "build:test": "tsc --build tsconfig.test.json",
     "build:test:clean": "tsc --build tsconfig.test.json --clean",
     "build": "tsc",
+    "format": "prettier --write ./packages",
+    "lint": "eslint --ext ts --ignore-path .gitignore .",
     "prebuild": "rimraf node_modules/@cuaklabs",
     "prebuild:prod": "npm run build:prod:clean",
     "prebuild:test": "npm run build:test:clean"
