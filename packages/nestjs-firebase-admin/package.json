@@ -1,0 +1,21 @@
+{
+  "name": "@cuaklabs/nestjs-firebase-admin",
+  "version": "0.0.1",
+  "description": "meow meow meow",
+  "keywords": [
+    "nestjs",
+    "firebase",
+    "firebase-admin"
+  ],
+  "author": "Cuak McCuackl <cuak.mccuakl@cuaklabs.com>",
+  "homepage": "https://github.com/cuaklabs/nestjs-meow/tree/main/packages/nestjs-firebase-admin#readme",
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuaklabs/nestjs-meow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cuaklabs/nestjs-meow/issues"
+  }
+}
