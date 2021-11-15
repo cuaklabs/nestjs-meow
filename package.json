@@ -1,0 +1,20 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Meow meow meow",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuaklabs/nestjs-meow.git"
+  },
+  "author": "Cuak McCuackl <cuak.mccuakl@cuaklabs.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cuaklabs/nestjs-meow/issues"
+  },
+  "homepage": "https://github.com/cuaklabs/nestjs-meow#readme"
+}
