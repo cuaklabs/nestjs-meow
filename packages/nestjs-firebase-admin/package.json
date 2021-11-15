@@ -17,5 +17,9 @@
   },
   "bugs": {
     "url": "https://github.com/cuaklabs/nestjs-meow/issues"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.2.0",
+    "firebase-admin": "^10.0.0"
   }
 }
