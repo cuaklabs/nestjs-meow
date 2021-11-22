@@ -55,6 +55,7 @@
     ]
   },
   "dependencies": {
+    "@nestjs/common": "^8.2.0",
     "firebase-admin": "^10.0.0"
   }
 }
