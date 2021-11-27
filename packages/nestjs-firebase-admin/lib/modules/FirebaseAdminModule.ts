@@ -14,30 +14,7 @@ import { getSecurityRules, SecurityRules } from 'firebase-admin/security-rules';
 import { getStorage, Storage } from 'firebase-admin/storage';
 
 import { AppAsyncOptions } from './AppAsyncOptions';
-
-export type FirebaseProviderType =
-  | typeof Auth
-  | typeof Firestore
-  | typeof Messaging
-  | typeof AppCheck
-  | typeof Installations
-  | typeof MachineLearning
-  | typeof ProjectManagement
-  | typeof RemoteConfig
-  | typeof SecurityRules
-  | typeof Storage;
-
-type FirebaseProviderInstance =
-  | Auth
-  | Firestore
-  | Messaging
-  | AppCheck
-  | Installations
-  | MachineLearning
-  | ProjectManagement
-  | RemoteConfig
-  | SecurityRules
-  | Storage;
+import { FirebaseProviderInstance, FirebaseProviderType } from './FirebaseProviderType';
 
 @Module({})
 export class FirebaseAdminModule {
@@ -88,7 +65,10 @@ export class FirebaseAdminModule {
     };
   }
 
-  public static forRootAsync(_options: AppAsyncOptions): DynamicModule {
+  public static forRootAsync(options: AppAsyncOptions): DynamicModule {
+    if (options.useClass === undefined && options.useExisting === undefined && options.useFactory === undefined) {
+      throw new Error('Configuration error');
+    }
     return {
       module: FirebaseAdminModule,
     };
