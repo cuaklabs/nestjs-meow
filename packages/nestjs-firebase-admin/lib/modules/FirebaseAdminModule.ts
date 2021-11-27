@@ -15,7 +15,7 @@ import { getStorage, Storage } from 'firebase-admin/storage';
 
 import { AppAsyncOptions } from './AppAsyncOptions';
 
-type FirebaseProviderType =
+export type FirebaseProviderType =
   | typeof Auth
   | typeof Firestore
   | typeof Messaging
