@@ -3,6 +3,7 @@ import { AppOptions } from 'firebase-admin';
 
 import { AppAsyncOptions } from '../models/AppAsyncOptions';
 import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
+import { FirebaseAdminCoreModuleProviders } from './FirebaseAdminCoreModuleProviders';
 import { FirebaseProviderType } from './FirebaseProviderType';
 
 @Module({})
@@ -14,11 +15,19 @@ export class FirebaseAdminModule {
     };
   }
 
-  public static getFeature(providers: FirebaseProviderType[]): DynamicModule {
+  public static injectProviders(firebaseProviders: FirebaseProviderType[]): DynamicModule {
     return {
-      exports: providers,
+      exports: firebaseProviders,
       imports: [FirebaseAdminCoreModule],
       module: FirebaseAdminModule,
+      providers: firebaseProviders.map((element: FirebaseProviderType) => {
+        return {
+          inject: [FirebaseAdminCoreModuleProviders],
+          provide: element,
+          useFactory: (firebaseAdminCoreModuleProviders: FirebaseAdminCoreModuleProviders) =>
+            firebaseAdminCoreModuleProviders.getProvider(element),
+        };
+      }),
     };
   }
 

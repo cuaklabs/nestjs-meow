@@ -1,20 +1,18 @@
-import { DynamicModule, FactoryProvider, Global, Module, Provider } from '@nestjs/common';
+import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 import { AppOptions } from 'firebase-admin';
 
 import { AppAsyncOptions } from '../models/AppAsyncOptions';
 import { AppOptionsFactory } from '../models/AppOptionsFactory';
 import { isAppClassAsyncOptions } from '../typeguards/isAppClassAsyncOptions';
 import { isAppFactoryAsyncOptions } from '../typeguards/isAppFactoryAsyncOptions';
-import { AppInitializer } from './AppInitializer';
 import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
-import { providers } from './firebaseAdminCoreModuleProviders';
-import { FirebaseProviderInstance } from './FirebaseProviderType';
+import { FirebaseAdminCoreModuleProviders } from './FirebaseAdminCoreModuleProviders';
 
 @Global()
 @Module({})
 export class FirebaseAdminCoreModule {
   public static forRootAsync(appAsyncOptions: AppAsyncOptions): DynamicModule {
-    const moduleProviders: Provider[] = [...providers, AppInitializer];
+    const moduleProviders: Provider[] = [FirebaseAdminCoreModuleProviders];
 
     if (isAppFactoryAsyncOptions(appAsyncOptions)) {
       moduleProviders.push({
@@ -42,7 +40,7 @@ export class FirebaseAdminCoreModule {
     }
 
     return {
-      exports: providers.map((element: Provider<FirebaseProviderInstance>) => (element as FactoryProvider).provide),
+      exports: [FirebaseAdminCoreModuleProviders],
       imports: appAsyncOptions.imports ?? [],
       module: FirebaseAdminCoreModule,
       providers: moduleProviders,
@@ -51,15 +49,14 @@ export class FirebaseAdminCoreModule {
 
   public static forRoot(appOptions: AppOptions): DynamicModule {
     return {
-      exports: providers.map((element: Provider<FirebaseProviderInstance>) => (element as FactoryProvider).provide),
+      exports: [FirebaseAdminCoreModuleProviders],
       module: FirebaseAdminCoreModule,
       providers: [
         {
           provide: APP_OPTIONS,
           useValue: appOptions,
         },
-        ...providers,
-        AppInitializer,
+        FirebaseAdminCoreModuleProviders,
       ],
     };
   }
