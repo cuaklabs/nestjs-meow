@@ -16,6 +16,7 @@ import { FirebaseProviderInstance } from './FirebaseProviderType';
 
 export const providers: Provider<FirebaseProviderInstance>[] = [
   {
+    inject: [AppInitializer],
     provide: Auth,
     useFactory: (appInitializer: AppInitializer): Auth => {
       appInitializer.initialize();
@@ -23,6 +24,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: Firestore,
     useFactory: (appInitializer: AppInitializer): Firestore => {
       appInitializer.initialize();
@@ -30,6 +32,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: Messaging,
     useFactory: (appInitializer: AppInitializer): Messaging => {
       appInitializer.initialize();
@@ -37,6 +40,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: AppCheck,
     useFactory: (appInitializer: AppInitializer): AppCheck => {
       appInitializer.initialize();
@@ -44,6 +48,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: Installations,
     useFactory: (appInitializer: AppInitializer): Installations => {
       appInitializer.initialize();
@@ -51,6 +56,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: MachineLearning,
     useFactory: (appInitializer: AppInitializer): MachineLearning => {
       appInitializer.initialize();
@@ -58,6 +64,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: ProjectManagement,
     useFactory: (appInitializer: AppInitializer): ProjectManagement => {
       appInitializer.initialize();
@@ -65,6 +72,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: RemoteConfig,
     useFactory: (appInitializer: AppInitializer): RemoteConfig => {
       appInitializer.initialize();
@@ -72,6 +80,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: SecurityRules,
     useFactory: (appInitializer: AppInitializer): SecurityRules => {
       appInitializer.initialize();
@@ -79,6 +88,7 @@ export const providers: Provider<FirebaseProviderInstance>[] = [
     },
   },
   {
+    inject: [AppInitializer],
     provide: Storage,
     useFactory: (appInitializer: AppInitializer): Storage => {
       appInitializer.initialize();
