@@ -1,7 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "version": "0.0.1",
   "description": "Meow meow meow",
   "main": "index.js",
   "scripts": {
@@ -16,7 +15,9 @@
     "prebuild": "rimraf node_modules/@cuaklabs",
     "prebuild:prod": "npm run build:prod:clean",
     "prebuild:test": "npm run build:test:clean",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublish:packages": "npm run build:prod",
+    "publish:packages": "lerna publish from-package"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "jest": "^27.3.1",
+    "lerna": "^4.0.0",
     "lint-staged": "^12.0.2",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
@@ -52,5 +54,9 @@
       "prettier --write",
       "eslint"
     ]
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.2.0",
+    "firebase-admin": "^10.0.0"
   }
 }
