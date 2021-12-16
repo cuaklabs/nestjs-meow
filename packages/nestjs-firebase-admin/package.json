@@ -1,6 +1,6 @@
 {
   "name": "@cuaklabs/nestjs-firebase-admin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "meow meow meow",
   "keywords": [
     "nestjs",
