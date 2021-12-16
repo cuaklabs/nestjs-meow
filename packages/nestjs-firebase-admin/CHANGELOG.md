@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [v0.0.3 - 2021-12-16]
+### Changed
+- Fixed unknown types of AppFactoryAsyncOptions
+
+
+
+
 ## [v0.0.2 - 2021-12-16]
 ### Changed
 - Updated npm scripts with right main entrypoint
