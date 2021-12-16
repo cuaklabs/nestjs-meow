@@ -1,7 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "version": "0.0.1",
   "description": "Meow meow meow",
   "main": "index.js",
   "scripts": {
@@ -16,7 +15,9 @@
     "prebuild": "rimraf node_modules/@cuaklabs",
     "prebuild:prod": "npm run build:prod:clean",
     "prebuild:test": "npm run build:test:clean",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublish:packages": "npm run build:prod",
+    "publish:packages": "lerna publish from-package"
   },
   "repository": {
     "type": "git",
