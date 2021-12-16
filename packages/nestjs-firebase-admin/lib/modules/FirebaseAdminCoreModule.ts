@@ -1,4 +1,4 @@
-import { DynamicModule, FactoryProvider, Module, Provider } from '@nestjs/common';
+import { DynamicModule, FactoryProvider, Global, Module, Provider } from '@nestjs/common';
 import { AppOptions } from 'firebase-admin';
 
 import { AppAsyncOptions } from '../models/AppAsyncOptions';
@@ -10,6 +10,7 @@ import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSy
 import { providers } from './firebaseAdminCoreModuleProviders';
 import { FirebaseProviderInstance } from './FirebaseProviderType';
 
+@Global()
 @Module({})
 export class FirebaseAdminCoreModule {
   public static forRootAsync(appAsyncOptions: AppAsyncOptions): DynamicModule {
