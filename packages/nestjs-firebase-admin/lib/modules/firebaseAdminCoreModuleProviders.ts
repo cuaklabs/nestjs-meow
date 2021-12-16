@@ -17,70 +17,70 @@ import { FirebaseProviderInstance } from './FirebaseProviderType';
 export const providers: Provider<FirebaseProviderInstance>[] = [
   {
     provide: Auth,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): Auth => {
       appInitializer.initialize();
       return getAuth();
     },
   },
   {
     provide: Firestore,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): Firestore => {
       appInitializer.initialize();
       return getFirestore();
     },
   },
   {
     provide: Messaging,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): Messaging => {
       appInitializer.initialize();
       return getMessaging();
     },
   },
   {
     provide: AppCheck,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): AppCheck => {
       appInitializer.initialize();
       return getAppCheck();
     },
   },
   {
     provide: Installations,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): Installations => {
       appInitializer.initialize();
       return getInstallations();
     },
   },
   {
     provide: MachineLearning,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): MachineLearning => {
       appInitializer.initialize();
       return getMachineLearning();
     },
   },
   {
     provide: ProjectManagement,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): ProjectManagement => {
       appInitializer.initialize();
       return getProjectManagement();
     },
   },
   {
     provide: RemoteConfig,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): RemoteConfig => {
       appInitializer.initialize();
       return getRemoteConfig();
     },
   },
   {
     provide: SecurityRules,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): SecurityRules => {
       appInitializer.initialize();
       return getSecurityRules();
     },
   },
   {
     provide: Storage,
-    useFactory: (appInitializer: AppInitializer) => {
+    useFactory: (appInitializer: AppInitializer): Storage => {
       appInitializer.initialize();
       return getStorage();
     },

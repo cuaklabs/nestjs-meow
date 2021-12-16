@@ -15,12 +15,6 @@ export class FirebaseAdminCoreModule {
   public static forRootAsync(appAsyncOptions: AppAsyncOptions): DynamicModule {
     const moduleProviders: Provider[] = [...providers, AppInitializer];
 
-    const module: DynamicModule = {
-      exports: providers.map((element: Provider<FirebaseProviderInstance>) => (element as FactoryProvider).provide),
-      module: FirebaseAdminCoreModule,
-      providers: moduleProviders,
-    };
-
     if (isAppFactoryAsyncOptions(appAsyncOptions)) {
       moduleProviders.push({
         inject: appAsyncOptions.inject ?? [],
@@ -46,7 +40,12 @@ export class FirebaseAdminCoreModule {
       });
     }
 
-    return module;
+    return {
+      exports: providers.map((element: Provider<FirebaseProviderInstance>) => (element as FactoryProvider).provide),
+      imports: appAsyncOptions.imports ?? [],
+      module: FirebaseAdminCoreModule,
+      providers: moduleProviders,
+    };
   }
 
   public static forRoot(appOptions: AppOptions): DynamicModule {
