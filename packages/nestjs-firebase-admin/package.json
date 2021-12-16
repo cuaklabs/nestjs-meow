@@ -10,7 +10,7 @@
   "author": "Cuak McCuackl <cuak.mccuakl@cuaklabs.com>",
   "homepage": "https://github.com/cuaklabs/nestjs-meow/tree/main/packages/nestjs-firebase-admin#readme",
   "license": "ISC",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cuaklabs/nestjs-meow.git"
