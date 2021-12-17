@@ -7,11 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [v0.1.0 - 2021-12-17]
+
+### Changed
+- Renamed `FirebaseProviderType` to `FirebaseType`.
+
+
+
+
 ## [v0.0.7 - 2021-12-16]
 ### Changed
 - Refactored FirebaseAdminModule
 - Refactored injectProviders function
-- Refactored logic
 
 
 
