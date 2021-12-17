@@ -14,7 +14,7 @@ import { getSecurityRules, SecurityRules } from 'firebase-admin/security-rules';
 import { getStorage, Storage } from 'firebase-admin/storage';
 
 import { APP_OPTIONS } from './firebaseAdminCoreInjectionSymbols';
-import { FirebaseInstance, FirebaseType } from './FirebaseProviderType';
+import { FirebaseInstance, FirebaseType } from './FirebaseType';
 
 @Injectable()
 export class FirebaseAdminCoreModuleProvider {

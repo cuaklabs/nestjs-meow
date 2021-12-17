@@ -4,7 +4,7 @@ import { AppExistingAsyncOptions } from './models/AppExistingAsyncOptions';
 import { AppFactoryAsyncOptions } from './models/AppFactoryAsyncOptions';
 import { AppOptionsFactory } from './models/AppOptionsFactory';
 import { FirebaseAdminModule } from './modules/FirebaseAdminModule';
-import { FirebaseType } from './modules/FirebaseProviderType';
+import { FirebaseType } from './modules/FirebaseType';
 
 export {
   FirebaseAdminModule,
