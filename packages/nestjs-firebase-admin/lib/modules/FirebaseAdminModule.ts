@@ -18,7 +18,6 @@ export class FirebaseAdminModule {
   public static injectProviders(firebaseTypes: FirebaseType[]): DynamicModule {
     return {
       exports: firebaseTypes,
-      imports: [FirebaseAdminCoreModule],
       module: FirebaseAdminModule,
       providers: firebaseTypes.map((firebaseType: FirebaseType) => {
         return {
