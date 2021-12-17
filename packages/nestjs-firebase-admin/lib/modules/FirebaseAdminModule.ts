@@ -4,7 +4,7 @@ import { AppOptions } from 'firebase-admin';
 import { AppAsyncOptions } from '../models/AppAsyncOptions';
 import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
 import { FirebaseAdminCoreModuleProviders } from './FirebaseAdminCoreModuleProviders';
-import { FirebaseProviderType } from './FirebaseProviderType';
+import { FirebaseType } from './FirebaseType';
 
 @Module({})
 export class FirebaseAdminModule {
@@ -15,17 +15,17 @@ export class FirebaseAdminModule {
     };
   }
 
-  public static injectProviders(firebaseProviders: FirebaseProviderType[]): DynamicModule {
+  public static injectProviders(firebaseTypes: FirebaseType[]): DynamicModule {
     return {
-      exports: firebaseProviders,
+      exports: firebaseTypes,
       imports: [FirebaseAdminCoreModule],
       module: FirebaseAdminModule,
-      providers: firebaseProviders.map((element: FirebaseProviderType) => {
+      providers: firebaseTypes.map((firebaseType: FirebaseType) => {
         return {
           inject: [FirebaseAdminCoreModuleProviders],
-          provide: element,
+          provide: firebaseType,
           useFactory: (firebaseAdminCoreModuleProviders: FirebaseAdminCoreModuleProviders) =>
-            firebaseAdminCoreModuleProviders.getProvider(element),
+            firebaseAdminCoreModuleProviders.getProvider(firebaseType),
         };
       }),
     };

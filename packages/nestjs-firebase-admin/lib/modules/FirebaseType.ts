@@ -10,7 +10,7 @@ import { RemoteConfig } from 'firebase-admin/remote-config';
 import { SecurityRules } from 'firebase-admin/security-rules';
 import { Storage } from 'firebase-admin/storage';
 
-export type FirebaseProviderType =
+export type FirebaseType =
   | typeof Auth
   | typeof Firestore
   | typeof Messaging
@@ -22,7 +22,7 @@ export type FirebaseProviderType =
   | typeof SecurityRules
   | typeof Storage;
 
-export type FirebaseProviderInstance =
+export type FirebaseInstance =
   | Auth
   | Firestore
   | Messaging
