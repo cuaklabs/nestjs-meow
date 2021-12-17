@@ -14,12 +14,12 @@ import { getSecurityRules, SecurityRules } from 'firebase-admin/security-rules';
 import { getStorage, Storage } from 'firebase-admin/storage';
 
 import { APP_OPTIONS } from './firebaseAdminCoreInjectionSymbols';
-import { FirebaseProviderInstance, FirebaseProviderType } from './FirebaseProviderType';
+import { FirebaseInstance, FirebaseType } from './FirebaseProviderType';
 
 @Injectable()
-export class FirebaseAdminCoreModuleProviders {
-  private readonly providers: Map<FirebaseProviderType, FirebaseProviderInstance> = new Map();
-  private readonly builders: Map<FirebaseProviderType, () => FirebaseProviderInstance> = new Map();
+export class FirebaseAdminCoreModuleProvider {
+  private readonly providers: Map<FirebaseType, FirebaseInstance> = new Map();
+  private readonly builders: Map<FirebaseType, () => FirebaseInstance> = new Map();
 
   constructor(@Inject(APP_OPTIONS) appOptions: AppOptions) {
     this.builders.set(Auth, getAuth);
@@ -36,11 +36,11 @@ export class FirebaseAdminCoreModuleProviders {
     initializeApp(appOptions);
   }
 
-  public getProvider(firebaseProviderType: FirebaseProviderType): FirebaseProviderInstance {
-    let provider: FirebaseProviderInstance | undefined = this.providers.get(firebaseProviderType);
+  public getProvider(firebaseProviderType: FirebaseType): FirebaseInstance {
+    let provider: FirebaseInstance | undefined = this.providers.get(firebaseProviderType);
 
     if (provider === undefined) {
-      provider = (this.builders.get(firebaseProviderType) as () => FirebaseProviderInstance)();
+      provider = (this.builders.get(firebaseProviderType) as () => FirebaseInstance)();
       this.providers.set(firebaseProviderType, provider);
     }
 
