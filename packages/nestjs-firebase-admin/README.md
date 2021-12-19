@@ -39,7 +39,7 @@ import { AppOptions } from 'firebase-admin';
       inject: [ConfigService],
       useFactory: (configService: ConfigService): AppOptions => {
         return {
-          
+          databaseURL: configService.get('DATABASE_URL'),
         };
       },
     }),
