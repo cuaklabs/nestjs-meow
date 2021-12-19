@@ -6,13 +6,13 @@ import { AppOptionsFactory } from '../models/AppOptionsFactory';
 import { isAppClassAsyncOptions } from '../typeguards/isAppClassAsyncOptions';
 import { isAppFactoryAsyncOptions } from '../typeguards/isAppFactoryAsyncOptions';
 import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
-import { FirebaseAdminCoreModuleProviders } from './FirebaseAdminCoreModuleProviders';
+import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 
 @Global()
 @Module({})
 export class FirebaseAdminCoreModule {
   public static forRootAsync(appAsyncOptions: AppAsyncOptions): DynamicModule {
-    const moduleProviders: Provider[] = [FirebaseAdminCoreModuleProviders];
+    const moduleProviders: Provider[] = [FirebaseAdminCoreModuleProvider];
 
     if (isAppFactoryAsyncOptions(appAsyncOptions)) {
       moduleProviders.push({
@@ -40,7 +40,7 @@ export class FirebaseAdminCoreModule {
     }
 
     return {
-      exports: [FirebaseAdminCoreModuleProviders],
+      exports: [FirebaseAdminCoreModuleProvider],
       imports: appAsyncOptions.imports ?? [],
       module: FirebaseAdminCoreModule,
       providers: moduleProviders,
@@ -49,14 +49,14 @@ export class FirebaseAdminCoreModule {
 
   public static forRoot(appOptions: AppOptions): DynamicModule {
     return {
-      exports: [FirebaseAdminCoreModuleProviders],
+      exports: [FirebaseAdminCoreModuleProvider],
       module: FirebaseAdminCoreModule,
       providers: [
         {
           provide: APP_OPTIONS,
           useValue: appOptions,
         },
-        FirebaseAdminCoreModuleProviders,
+        FirebaseAdminCoreModuleProvider,
       ],
     };
   }
