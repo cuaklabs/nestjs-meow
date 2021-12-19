@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [Unreleased]
+
+### Changed
+- Updated `@nestjs/common` and `firebase-admin` dependencies to be `peerDependencies`.
+
+
+
+
 ## [v0.1.1 - 2021-12-17]
 
 ### Changed
