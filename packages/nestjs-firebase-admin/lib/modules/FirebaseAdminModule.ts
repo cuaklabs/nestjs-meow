@@ -3,7 +3,7 @@ import { AppOptions } from 'firebase-admin';
 
 import { AppAsyncOptions } from '../models/AppAsyncOptions';
 import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
-import { FirebaseAdminCoreModuleProviders } from './FirebaseAdminCoreModuleProviders';
+import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 import { FirebaseType } from './FirebaseType';
 
 @Module({})
@@ -21,10 +21,10 @@ export class FirebaseAdminModule {
       module: FirebaseAdminModule,
       providers: firebaseTypes.map((firebaseType: FirebaseType) => {
         return {
-          inject: [FirebaseAdminCoreModuleProviders],
+          inject: [FirebaseAdminCoreModuleProvider],
           provide: firebaseType,
-          useFactory: (firebaseAdminCoreModuleProviders: FirebaseAdminCoreModuleProviders) =>
-            firebaseAdminCoreModuleProviders.getProvider(firebaseType),
+          useFactory: (firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider) =>
+            firebaseAdminCoreModuleProvider.getProvider(firebaseType),
         };
       }),
     };
