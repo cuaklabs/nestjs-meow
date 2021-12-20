@@ -1,17 +1,17 @@
-import { AppAsyncOptions } from './models/AppAsyncOptions';
-import { AppClassAsyncOptions } from './models/AppClassAsyncOptions';
-import { AppExistingAsyncOptions } from './models/AppExistingAsyncOptions';
-import { AppFactoryAsyncOptions } from './models/AppFactoryAsyncOptions';
-import { AppOptionsFactory } from './models/AppOptionsFactory';
+import { FirebaseType } from './models/FirebaseType';
+import { NestFirebaseAdminAppAsyncOptions } from './models/NestFirebaseAdminAppAsyncOptions';
+import { NestFirebaseAdminAppClassAsyncOptions } from './models/NestFirebaseAdminAppClassAsyncOptions';
+import { NestFirebaseAdminAppFactoryAsyncOptions } from './models/NestFirebaseAdminAppFactoryAsyncOptions';
+import { NestFirebaseAdminAppOptionsFactory } from './models/NestFirebaseAdminAppOptionsFactory';
 import { FirebaseAdminModule } from './modules/FirebaseAdminModule';
-import { FirebaseType } from './modules/FirebaseType';
+import { InjectFirebaseProvider } from './modules/InjectFirebaseProvider';
 
 export {
   FirebaseAdminModule,
   FirebaseType,
-  AppAsyncOptions,
-  AppFactoryAsyncOptions,
-  AppClassAsyncOptions,
-  AppExistingAsyncOptions,
-  AppOptionsFactory,
+  NestFirebaseAdminAppAsyncOptions,
+  NestFirebaseAdminAppFactoryAsyncOptions,
+  NestFirebaseAdminAppClassAsyncOptions,
+  NestFirebaseAdminAppOptionsFactory,
+  InjectFirebaseProvider,
 };
