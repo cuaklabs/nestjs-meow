@@ -1,60 +1,56 @@
 import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
-import { AppOptions } from 'firebase-admin';
 
-import { AppAsyncOptions } from '../models/AppAsyncOptions';
-import { AppOptionsFactory } from '../models/AppOptionsFactory';
-import { isAppClassAsyncOptions } from '../typeguards/isAppClassAsyncOptions';
-import { isAppFactoryAsyncOptions } from '../typeguards/isAppFactoryAsyncOptions';
+import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
+import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
+import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
+import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
 import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 
 @Global()
 @Module({})
 export class FirebaseAdminCoreModule {
-  public static forRootAsync(appAsyncOptions: AppAsyncOptions): DynamicModule {
+  public static forRootAsync(nestFirebaseAdminAppAsyncOptions: NestFirebaseAdminAppAsyncOptions): DynamicModule {
     const moduleProviders: Provider[] = [FirebaseAdminCoreModuleProvider];
 
-    if (isAppFactoryAsyncOptions(appAsyncOptions)) {
+    if (isNestFirebaseAdminAppFactoryAsyncOptions(nestFirebaseAdminAppAsyncOptions)) {
       moduleProviders.push({
-        inject: appAsyncOptions.inject ?? [],
+        inject: nestFirebaseAdminAppAsyncOptions.inject ?? [],
         provide: APP_OPTIONS,
-        useFactory: appAsyncOptions.useFactory,
+        useFactory: nestFirebaseAdminAppAsyncOptions.useFactory,
       });
     } else {
-      if (isAppClassAsyncOptions(appAsyncOptions)) {
-        moduleProviders.push({
-          provide: APP_OPTIONS_FACTORY,
-          useClass: appAsyncOptions.useClass,
-        });
-      } else {
-        moduleProviders.push({
-          provide: APP_OPTIONS_FACTORY,
-          useValue: appAsyncOptions.useExisting,
-        });
-      }
+      moduleProviders.push({
+        provide: APP_OPTIONS_FACTORY,
+        useClass: nestFirebaseAdminAppAsyncOptions.useClass,
+      });
+
       moduleProviders.push({
         inject: [APP_OPTIONS_FACTORY],
         provide: APP_OPTIONS,
-        useFactory: (appOptionsFactory: AppOptionsFactory) => appOptionsFactory.createAppOptions(),
+        useFactory: (
+          nestFirebaseAdminAppFactoryAsyncOptions: NestFirebaseAdminAppOptionsFactory,
+        ): Promise<NestFirebaseAdminAppOptions> | NestFirebaseAdminAppOptions =>
+          nestFirebaseAdminAppFactoryAsyncOptions.createNestFirebaseAdminAppOptions(),
       });
     }
 
     return {
       exports: [FirebaseAdminCoreModuleProvider],
-      imports: appAsyncOptions.imports ?? [],
+      imports: nestFirebaseAdminAppAsyncOptions.imports ?? [],
       module: FirebaseAdminCoreModule,
       providers: moduleProviders,
     };
   }
 
-  public static forRoot(appOptions: AppOptions): DynamicModule {
+  public static forRoot(nestFirebaseAdminAppOptions: NestFirebaseAdminAppOptions): DynamicModule {
     return {
       exports: [FirebaseAdminCoreModuleProvider],
       module: FirebaseAdminCoreModule,
       providers: [
         {
           provide: APP_OPTIONS,
-          useValue: appOptions,
+          useValue: nestFirebaseAdminAppOptions,
         },
         FirebaseAdminCoreModuleProvider,
       ],
