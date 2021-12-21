@@ -9,8 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added 
+- Multiple connections/apps feature
+- `InjectFirebaseProvider` decorator
+
 ### Changed
 - Updated `@nestjs/common` and `firebase-admin` dependencies to be `peerDependencies`.
+- Updated dependencies
 
 
 
