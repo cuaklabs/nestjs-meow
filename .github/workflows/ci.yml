@@ -2,6 +2,7 @@ name: ci
 on:
   pull_request:
     paths:
+      - '.github/workflows/ci.yml'
       - 'packages/**/*.ts'
       - 'package-lock.json'
 jobs:
