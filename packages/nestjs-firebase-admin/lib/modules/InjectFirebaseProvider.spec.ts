@@ -1,8 +1,12 @@
-jest.mock('./getFirebaseProviderId');
+jest.mock('@nestjs/common', () => ({ Inject: jest.fn() }));
+
+import { Inject } from '@nestjs/common';
 // eslint-disable-next-line import/no-unresolved
 import { Auth } from 'firebase-admin/auth';
 
-import { FirebaseInstance, FirebaseType } from '../models/FirebaseType';
+jest.mock('./getFirebaseProviderId');
+
+import { FirebaseType } from '../models/FirebaseType';
 import { getFirebaseProviderId } from './getFirebaseProviderId';
 import { InjectFirebaseProvider } from './InjectFirebaseProvider';
 
@@ -15,29 +19,19 @@ describe(InjectFirebaseProvider.name, () => {
     });
 
     describe('when called', () => {
-      let targetFixture: unknown;
-
       beforeAll(async () => {
         (getFirebaseProviderId as jest.Mock<string | FirebaseType>).mockReturnValueOnce(firebaseType);
 
-        class TargetFixture {
-          constructor(@InjectFirebaseProvider(firebaseType) private readonly foo: FirebaseInstance) {}
-        }
-
-        // const moduleRef: TestingModule = await Test.createTestingModule({
-        //   providers: [
-        //     TargetFixture,
-        //     {
-        //       provide: firebaseType,
-        //       useValue: {},
-        //     },
-        //   ],
-        // }).compile();
-        targetFixture = TargetFixture;
+        InjectFirebaseProvider(firebaseType);
       });
 
       afterAll(() => {
         jest.clearAllMocks();
+      });
+
+      it('should call Inject()', () => {
+        expect(Inject).toHaveBeenCalledTimes(1);
+        expect(Inject).toHaveBeenCalledWith(firebaseType);
       });
 
       it('should call getFirebaseProviderId', () => {
@@ -57,29 +51,19 @@ describe(InjectFirebaseProvider.name, () => {
     });
 
     describe('when called', () => {
-      let targetFixture: unknown;
-
       beforeAll(async () => {
         (getFirebaseProviderId as jest.Mock<string | FirebaseType>).mockReturnValueOnce(firebaseType);
 
-        class TargetFixture {
-          constructor(@InjectFirebaseProvider(firebaseType, appName) private readonly foo: FirebaseInstance) {}
-        }
-
-        // const moduleRef: TestingModule = await Test.createTestingModule({
-        //   providers: [
-        //     TargetFixture,
-        //     {
-        //       provide: firebaseType,
-        //       useValue: {},
-        //     },
-        //   ],
-        // }).compile();
-        targetFixture = TargetFixture;
+        InjectFirebaseProvider(firebaseType, appName);
       });
 
       afterAll(() => {
         jest.clearAllMocks();
+      });
+
+      it('should call Inject()', () => {
+        expect(Inject).toHaveBeenCalledTimes(1);
+        expect(Inject).toHaveBeenCalledWith(firebaseType);
       });
 
       it('should call getFirebaseProviderId', () => {
