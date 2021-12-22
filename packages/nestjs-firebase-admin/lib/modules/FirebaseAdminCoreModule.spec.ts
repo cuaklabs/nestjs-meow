@@ -136,7 +136,7 @@ describe(FirebaseAdminCoreModule.name, () => {
           });
         });
 
-        it('should callisNestFirebaseAdminAppFactoryAsyncOptions()', () => {
+        it('should call isNestFirebaseAdminAppFactoryAsyncOptions()', () => {
           expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledTimes(1);
           expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
         });
