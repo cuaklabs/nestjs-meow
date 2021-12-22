@@ -100,94 +100,47 @@ describe(FirebaseAdminModule.name, () => {
   });
 
   describe('.injectProviders()', () => {
-    describe('having a firebaseType', () => {
-      let firebaseTypes: FirebaseType[];
+    let firebaseTypes: FirebaseType[];
+    let appName: string | undefined;
 
-      beforeAll(() => {
-        firebaseTypes = [Auth, Firestore];
-      });
-
-      describe('when called', () => {
-        let result: unknown;
-
-        beforeAll(() => {
-          (getFirebaseProviderId as jest.Mock<string | FirebaseType>).mockImplementation(
-            (firebaseType: FirebaseType) => firebaseType,
-          );
-
-          result = FirebaseAdminModule.injectProviders(firebaseTypes);
-        });
-
-        afterAll(() => {
-          jest.clearAllMocks();
-        });
-
-        it('should call getFirebaseProviderId', () => {
-          expect(getFirebaseProviderId).toHaveBeenCalledTimes(firebaseTypes.length);
-          for (const [i, firebaseType] of firebaseTypes.entries()) {
-            expect(getFirebaseProviderId).toHaveBeenNthCalledWith(i + 1, firebaseType, undefined);
-          }
-        });
-
-        it('should return a DynamicModule', () => {
-          expect(result).toStrictEqual({
-            exports: firebaseTypes,
-            module: FirebaseAdminModule,
-            providers: firebaseTypes.map((firebaseType: FirebaseType) => {
-              return {
-                inject: [FirebaseAdminCoreModuleProvider],
-                provide: firebaseType,
-                useFactory: expect.any(Function) as (...args: unknown[]) => unknown,
-              };
-            }),
-          });
-        });
-      });
+    beforeAll(() => {
+      firebaseTypes = [Auth, Firestore];
+      appName = 'app-name-example';
     });
 
-    describe('having a firebaseType and an appName', () => {
-      let firebaseTypes: FirebaseType[];
-      let appName: string;
+    describe('when called', () => {
+      let result: unknown;
 
       beforeAll(() => {
-        firebaseTypes = [Auth, Firestore];
-        appName = 'app-name-example';
+        (getFirebaseProviderId as jest.Mock<string | FirebaseType>).mockImplementation(
+          (firebaseType: FirebaseType, _appName: string) => firebaseType,
+        );
+
+        result = FirebaseAdminModule.injectProviders(firebaseTypes, appName);
       });
 
-      describe('when called', () => {
-        let result: unknown;
+      afterAll(() => {
+        jest.clearAllMocks();
+      });
 
-        beforeAll(() => {
-          (getFirebaseProviderId as jest.Mock<string | FirebaseType>).mockImplementation(
-            (firebaseType: FirebaseType, _appName: string) => firebaseType,
-          );
+      it('should call getFirebaseProviderId', () => {
+        expect(getFirebaseProviderId).toHaveBeenCalledTimes(firebaseTypes.length);
+        for (const [i, firebaseType] of firebaseTypes.entries()) {
+          expect(getFirebaseProviderId).toHaveBeenNthCalledWith(i + 1, firebaseType, appName);
+        }
+      });
 
-          result = FirebaseAdminModule.injectProviders(firebaseTypes, appName);
-        });
-
-        afterAll(() => {
-          jest.clearAllMocks();
-        });
-
-        it('should call getFirebaseProviderId', () => {
-          expect(getFirebaseProviderId).toHaveBeenCalledTimes(firebaseTypes.length);
-          for (const [i, firebaseType] of firebaseTypes.entries()) {
-            expect(getFirebaseProviderId).toHaveBeenNthCalledWith(i + 1, firebaseType, appName);
-          }
-        });
-
-        it('should return a DynamicModule', () => {
-          expect(result).toStrictEqual({
-            exports: firebaseTypes,
-            module: FirebaseAdminModule,
-            providers: firebaseTypes.map((firebaseType: FirebaseType) => {
-              return {
-                inject: [FirebaseAdminCoreModuleProvider],
-                provide: firebaseType,
-                useFactory: expect.any(Function) as (...args: unknown[]) => unknown,
-              };
-            }),
-          });
+      it('should return a DynamicModule', () => {
+        expect(result).toStrictEqual({
+          exports: firebaseTypes,
+          module: FirebaseAdminModule,
+          providers: firebaseTypes.map((firebaseType: FirebaseType) => {
+            return {
+              inject: [FirebaseAdminCoreModuleProvider],
+              provide: firebaseType,
+              useFactory: expect.any(Function) as (...args: unknown[]) => unknown,
+            };
+          }),
         });
       });
     });
