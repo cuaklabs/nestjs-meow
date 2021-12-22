@@ -5,7 +5,7 @@ import { FirebaseType } from '../models/FirebaseType';
 import { getFirebaseProviderId } from './getFirebaseProviderId';
 
 describe(getFirebaseProviderId.name, () => {
-  describe('not having a appName', () => {
+  describe('having a FirebaseType', () => {
     let firebaseType: FirebaseType;
 
     beforeAll(() => {
@@ -19,13 +19,13 @@ describe(getFirebaseProviderId.name, () => {
         result = getFirebaseProviderId(firebaseType);
       });
 
-      it('should return Auth', () => {
+      it(`should return Auth`, () => {
         expect(result).toBe(firebaseType);
       });
     });
   });
 
-  describe('having a appName', () => {
+  describe('having a FirebaseType and an appName', () => {
     let appName: string;
     let firebaseType: FirebaseType;
 
@@ -41,7 +41,7 @@ describe(getFirebaseProviderId.name, () => {
         result = getFirebaseProviderId(firebaseType, appName);
       });
 
-      it('should return Auth', () => {
+      it(`should return appName-example_Auth`, () => {
         expect(result).toBe(`${appName}_${firebaseType.name}`);
       });
     });
