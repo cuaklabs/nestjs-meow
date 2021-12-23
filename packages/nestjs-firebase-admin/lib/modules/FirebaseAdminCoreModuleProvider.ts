@@ -54,19 +54,29 @@ export class FirebaseAdminCoreModuleProvider {
       appName ?? DEFAULT_APP,
     );
 
-    if (appName !== undefined && providersByAppName === undefined) {
-      throw new Error(`App ${appName} does not exist`);
+    if (providersByAppName === undefined) {
+      let errorDescription: string;
+
+      if (appName === undefined) {
+        errorDescription = 'App does not exist. Expecting a named app, found no app name.';
+      } else {
+        errorDescription = `No app with name "${appName}" was found.`;
+      }
+
+      throw new Error(errorDescription);
+    } else {
+      let provider: FirebaseInstance | undefined = providersByAppName.get(firebaseType);
+
+      if (provider === undefined) {
+        const builder: (app?: App) => FirebaseInstance = this.builders.get(firebaseType) as (
+          app?: App,
+        ) => FirebaseInstance;
+
+        provider = builder(this.firebaseApps.get(appName ?? DEFAULT_APP));
+        providersByAppName.set(firebaseType, provider);
+      }
+
+      return provider;
     }
-
-    let provider: FirebaseInstance | undefined = providersByAppName?.get(firebaseType);
-
-    if (provider === undefined) {
-      provider = (this.builders.get(firebaseType) as (app?: App) => FirebaseInstance)(
-        this.firebaseApps.get(appName ?? DEFAULT_APP),
-      );
-      providersByAppName?.set(firebaseType, provider);
-    }
-
-    return provider;
   }
 }
