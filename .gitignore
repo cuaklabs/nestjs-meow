@@ -10,4 +10,7 @@ packages/**/*.js
 # TypeScript cache
 *.tsbuildinfo
 
+# IstambulJs coverage
+/coverage
+
 /tmp

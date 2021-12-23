@@ -15,6 +15,7 @@
         }
       },
       "moduleFileExtensions": ["ts", "js", "json"],
+      "resolver": "<rootDir>/jest-resolver.js",
       "rootDir": ".",
       "roots": ["<rootDir>/dist", "<rootDir>/packages"],
       "testEnvironment": "node",
@@ -28,6 +29,7 @@
         "/node_modules/"
       ],
       "moduleFileExtensions": ["ts", "js", "json"],
+      "resolver": "<rootDir>/jest-resolver.js",
       "rootDir": ".",
       "roots": ["<rootDir>/dist", "<rootDir>/packages"],
       "testEnvironment": "node",

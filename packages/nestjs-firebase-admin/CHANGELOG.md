@@ -9,8 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Updated `FirebaseAdminModule` with `injectProviders` method.
+- `NameAppOptionsPair` model.
+- `NestFirebaseAdminAppOptions` model.
+- `InjectFirebaseProvider` decorator.
+
 ### Changed
 - Updated `@nestjs/common` and `firebase-admin` dependencies to be `peerDependencies`.
+- Updated dependencies.
 
 
 
@@ -33,36 +40,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v0.0.7 - 2021-12-16]
 ### Changed
-- Refactored FirebaseAdminModule
-- Refactored injectProviders function
+- Refactored `FirebaseAdminModule`.
+- Refactored `injectProviders` function.
 
 
 
 
 ## [v0.0.6 - 2021-12-16]
 ### Changed
-- Fixed injection of FirebaseAdminCoreModule
+- Fixed injection of `FirebaseAdminCoreModule`.
 
 
 
 
 ## [v0.0.5 - 2021-12-16]
 ### Changed
-- Added inject to factory providers
+- Added `inject` to factory providers.
 
 
 
 
 ## [v0.0.4 - 2021-12-16]
 ### Changed
-- Added imports to AppFactoryAsyncOptions
+- Added imports to `AppFactoryAsyncOptions`.
 
 
 
 
 ## [v0.0.3 - 2021-12-16]
 ### Changed
-- Fixed unknown types of AppFactoryAsyncOptions
+- Fixed unknown types of `AppFactoryAsyncOptions`.
 
 
 
@@ -76,10 +83,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v0.0.1 - 2021-12-16]
 ### Added
-- FirebaseAdminModule
-- FirebaseProviderType
-- AppAsyncOptions
-- AppFactoryAsyncOptions
-- AppClassAsyncOptions
-- AppExistingAsyncOptions
-- AppOptionsFactory
+- `FirebaseAdminModule`.
+- `FirebaseProviderType`.
+- `AppAsyncOptions`.
+- `AppFactoryAsyncOptions`.
+- `AppClassAsyncOptions`.
+- `AppExistingAsyncOptions`.
+- `AppOptionsFactory`.
