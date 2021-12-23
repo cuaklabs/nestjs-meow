@@ -54,11 +54,11 @@ export class FirebaseAdminCoreModuleProvider {
       appName ?? DEFAULT_APP,
     );
 
-    let provider: FirebaseInstance | undefined = providersByAppName?.get(firebaseType);
-
-    if (appName !== undefined && provider === undefined) {
+    if (appName !== undefined && providersByAppName === undefined) {
       throw new Error(`App ${appName} does not exist`);
     }
+
+    let provider: FirebaseInstance | undefined = providersByAppName?.get(firebaseType);
 
     if (provider === undefined) {
       provider = (this.builders.get(firebaseType) as (app?: App) => FirebaseInstance)(

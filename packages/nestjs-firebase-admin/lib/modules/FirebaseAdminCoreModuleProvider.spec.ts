@@ -18,6 +18,7 @@ import { Auth, getAuth } from 'firebase-admin/auth';
 
 import { FirebaseType } from '../models/FirebaseType';
 import { NameAppOptionsPair } from '../models/NameAppOptionsPair';
+import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 
 describe(FirebaseAdminCoreModuleProvider.name, () => {
@@ -130,45 +131,81 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
       });
     });
 
-    /*
-
-    describe('having a NameAppOptionsPair[]', () => {
-      let nameAppOptionsPairFixture: NameAppOptionsPair[];
+    describe('having a firebaseType and an appName', () => {
+      let firebaseTypeFixture: FirebaseType;
+      let appName: string;
 
       beforeAll(() => {
-        nameAppOptionsPairFixture = [
-          {
-            appOptions: {},
-            name: 'name-example',
-          },
-        ];
+        firebaseTypeFixture = Auth;
+        appName = 'app-name-example';
       });
 
-      describe('when called', () => {
-        beforeAll(() => {
-          (initializeApp as jest.Mock<App>).mockReturnValueOnce({} as Partial<App> as App);
+      describe('when called and this.providers.get() returns undefined', () => {
+        let authFixture: Auth;
+        let appFixture: App;
 
-          new FirebaseAdminCoreModuleProvider(nameAppOptionsPairFixture);
+        let result: unknown;
+
+        beforeAll(() => {
+          authFixture = {} as Partial<Auth> as Auth;
+          appFixture = {} as Partial<App> as App;
+
+          (initializeApp as jest.Mock<App>).mockReturnValueOnce(appFixture);
+          (getAuth as jest.Mock<Auth>).mockReturnValueOnce(authFixture);
+
+          const appOptionsFixture: NestFirebaseAdminAppOptions = [{ appOptions: {}, name: 'other-app-name-example' }];
+
+          const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider = new FirebaseAdminCoreModuleProvider(
+            appOptionsFixture,
+          );
+
+          try {
+            firebaseAdminCoreModuleProvider.getProvider(firebaseTypeFixture, appName);
+          } catch (error: unknown) {
+            result = error;
+          }
         });
 
         afterAll(() => {
           jest.clearAllMocks();
         });
 
-        it('should call initializeApp()', () => {
-          expect(initializeApp).toHaveBeenCalledTimes(nameAppOptionsPairFixture.length);
+        it('should throw a Error', () => {
+          expect(result).toBeInstanceOf(Error);
+          expect((result as Error).message).toStrictEqual(`App ${appName} does not exist`);
+        });
+      });
 
-          for (const [i, nameAppOptionsPair] of nameAppOptionsPairFixture.entries()) {
-            expect(initializeApp).toHaveBeenNthCalledWith(
-              i + 1,
-              nameAppOptionsPair.appOptions,
-              nameAppOptionsPair.name,
-            );
-          }
+      describe('when called and this.providers.get() returns a Provider', () => {
+        let authFixture: Auth;
+        let appFixture: App;
+
+        let result: unknown;
+
+        beforeAll(() => {
+          authFixture = {} as Partial<Auth> as Auth;
+          appFixture = {} as Partial<App> as App;
+
+          (initializeApp as jest.Mock<App>).mockReturnValueOnce(appFixture);
+          (getAuth as jest.Mock<Auth>).mockReturnValueOnce(authFixture);
+
+          const appOptionsFixture: NestFirebaseAdminAppOptions = [{ appOptions: {}, name: appName }];
+
+          const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider = new FirebaseAdminCoreModuleProvider(
+            appOptionsFixture,
+          );
+
+          result = firebaseAdminCoreModuleProvider.getProvider(firebaseTypeFixture, appName);
+        });
+
+        afterAll(() => {
+          jest.clearAllMocks();
+        });
+
+        it('should return a Provider', () => {
+          expect(result).toStrictEqual(authFixture);
         });
       });
     });
-
-    */
   });
 });
