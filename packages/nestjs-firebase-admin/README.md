@@ -4,6 +4,10 @@
 
 <h1 align="center">Nestjs Firebase Admin Module</h1>
 
+<p align="center">
+  <img src="https://github.com/cuaklabs/nestjs-meow/workflows/ci/badge.svg" alt="Build status"/>
+</p>
+
 ## Description
 
 [Firebase Admin](https://firebase.google.com/docs/reference/admin/node) module for [Nest](https://github.com/nestjs/nest).
@@ -65,13 +69,83 @@ export class CatModule {}
 
 ```ts
 import { Auth } from 'firebase-admin/auth';
+import { InjectFirebaseProvider } from '@cuaklabs/nestjs-firebase-admin';
 
 export class CatService {
-  constructor(private readonly auth: Auth) {}
+  constructor(@InjectFirebaseProvider(Auth) private readonly auth: Auth) {}
 
   public doSomething(): void {
 
   }
 }
+```
+
+## Multiple apps/connections
+
+#### Initialization
+
+```ts
+import { FirebaseAdminModule } from '@cuaklabs/nestjs-firebase-admin';
+
+@Module({
+  imports: [FirebaseAdminModule.forRoot([{ name: 'app-name' }])],
+})
+export class AppModule {}
+```
+
+```ts
+import { FirebaseAdminModule } from '@cuaklabs/nestjs-firebase-admin';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AppOptions } from 'firebase-admin';
+
+@Module({
+  imports: [
+    FirebaseAdminModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService): AppOptions => {
+        return [
+          { 
+            name: 'app-name',
+            appOptions: {
+              databaseURL: configService.get('DATABASE_URL'),
+            },
+          },
+        ];
+      },
+    }),
+
+  ],
+})
+export class AppModule {}
+```
+
+#### Inject Providers
+
+```ts
+import { Auth } from 'firebase-admin/auth';
+import { CatService } from './CatService';
+import { FirebaseAdminModule } from '@cuaklabs/nestjs-firebase-admin';
+
+@Module({
+  imports: [FirebaseAdminModule.injectProviders([Auth], 'app-name')],
+  providers: [CatService],
+})
+export class CatModule {}
+```
+
+```ts
+import { Auth } from 'firebase-admin/auth';
+import { InjectFirebaseProvider } from '@cuaklabs/nestjs-firebase-admin';
+
+export class CatService {
+  constructor(@InjectFirebaseProvider(Auth, 'app-name') private readonly auth: Auth) {}
+
+  public doSomething(): void {
+
+  }
+}
+```
+
 
 
