@@ -1,15 +1,12 @@
-flag_management:
-  default_rules:
-    carryforward: true
-    statuses:
-      - name_prefix: project-
-        type: project
+coverage:
+  status:
+    project:
+      default:
         target: auto
-        threshold: 1%
-      - name_prefix: patch-
-        type: patch
-        target: 90%
-
+        threshold: 2%
+    patch:
+      default:
+        target: auto
+        threshold: 5%
 comment:
-  behavior: default
-  layout: "reach, diff, flags, files"
+  layout: 'reach, flags'
