@@ -5,7 +5,13 @@
 <h1 align="center">Nestjs Firebase Admin Module</h1>
 
 <p align="center">
-  <img src="https://github.com/cuaklabs/nestjs-meow/workflows/ci/badge.svg" alt="Build status"/>
+  <a href="https://github.com/cuaklabs/nestjs-meow/workflows/build/badge.svg">
+    <img src="https://github.com/cuaklabs/nestjs-meow/workflows/build/badge.svg" alt="Build status"/>
+  </a>
+
+  <a href="https://codecov.io/gh/cuaklabs/nestjs-meow">
+    <img src="https://codecov.io/gh/cuaklabs/nestjs-meow/branch/master/graph/badge.svg?token=SA47S3AN5P" alt="Coverage status"/>
+  </a>
 </p>
 
 ## Description
