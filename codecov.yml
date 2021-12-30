@@ -1,12 +1,15 @@
-coverage:
-  status:
-    project:
-      default: off
-      nestjs-firebase-admin:
-        flags: 
-          - nestjs-firebase-admin
+flag_management:
+  default_rules:
+    carryforward: true
+    statuses:
+      - name_prefix: project-
+        type: project
+        target: auto
+        threshold: 1%
+      - name_prefix: patch-
+        type: patch
+        target: 90%
 
-flags:
-  nestjs-firebase-admin:
-    paths:
-      - packages/nestjs-firebase-admin/
+comment:
+  behavior: default
+  layout: "reach, diff, flags, files"
