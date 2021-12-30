@@ -208,7 +208,7 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
 
         it('should throw a Error', () => {
           expect(result).toBeInstanceOf(Error);
-          expect((result as Error).message).toStrictEqual(`No app with name "${appName}" was found.`);
+          expect((result as Error).message).toBe(`No app with name "${appName}" was found.`);
         });
       });
     });
