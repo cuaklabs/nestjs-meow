@@ -2,10 +2,11 @@ coverage:
   status:
     project:
       default: off
-      "@cuaklabs/nestjs-firebase-admin":
-        flags: "@cuaklabs/nestjs-firebase-admin"
+      nestjs-firebase-admin:
+        flags: 
+          - nestjs-firebase-admin
 
 flags:
-  "@cuaklabs/nestjs-firebase-admin":
+  nestjs-firebase-admin:
     paths:
       - packages/nestjs-firebase-admin/
