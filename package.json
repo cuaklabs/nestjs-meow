@@ -20,16 +20,18 @@
     "publish:packages": "lerna publish from-package",
     "test:coverage": "npm test -- --coverage",
     "test:integration": "jest --selectProjects Integration",
-    "test:integration:js": "npm run test:js -- --selectProjects Integration",
+    "test:integration:js": "jest --config=jest.js.config.js --selectProjects Integration",
     "test:master": "jest --changedSince=origin/master",
     "test:js:ci": "npm run test:js -- --ci",
     "test:js:coverage": "npm run test:js -- --coverage",
     "test:js:ci:coverage": "npm run test:js -- --ci --coverage",
-    "test:js": "npm test -- --config=jest.js.config.json",
+    "test:js": "npm test -- --config=jest.js.config.js",
+    "test:package:firebase-admin": "jest --selectProjects FirebaseAdmin-Integration FirebaseAdmin-Unit",
+    "test:package:firebase-admin:js": "jest --config=jest.js.config.js --selectProjects FirebaseAdmin-Integration FirebaseAdmin-Unit",
     "test:previous": "jest --changedSince=HEAD~1",
     "test:unit": "jest --selectProjects Unit",
-    "test:unit:js": "npm run test:js -- --selectProjects Unit",
-    "test": "jest"
+    "test:unit:js": "jest --config=jest.js.config.js --selectProjects Unit",
+    "test": "jest --selectProjects Unit Integration"
   },
   "repository": {
     "type": "git",
