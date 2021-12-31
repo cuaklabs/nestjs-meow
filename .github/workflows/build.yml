@@ -88,7 +88,12 @@ jobs:
         if: ${{ !steps.ts-build-cache.outputs.cache-hit }}
 
       - name: Launch Tests
+        run: npm run test:js:ci
+        if: ${{ !(matrix.node-version == 16 && matrix.os == 'ubuntu-latest') }}
+
+      - name: Launch Tests and generate coverage report
         run: npm run test:js:ci:coverage
+        if: ${{ matrix.node-version == 16 && matrix.os == 'ubuntu-latest' }}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
