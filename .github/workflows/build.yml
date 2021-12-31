@@ -85,7 +85,7 @@ jobs:
 
       - name: Build on cache miss
         run: npm run build:test
-        if: ${{ !ts-build-cache.cache-hit }}
+        if: ${{ !steps.ts-build-cache.outputs.cache-hit }}
 
       - name: Launch Tests
         run: npm run test:js:ci:coverage
