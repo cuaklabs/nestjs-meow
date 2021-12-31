@@ -37,7 +37,7 @@ jobs:
           echo "::set-output name=gitCommitHash::$(git rev-parse HEAD)"
 
       - uses: actions/cache@v2
-        id: npm-cache
+        id: ts-build-cache
         with:
           path: ./dist
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
@@ -76,12 +76,16 @@ jobs:
           echo "::set-output name=gitCommitHash::$(git rev-parse HEAD)"
 
       - uses: actions/cache@v2
-        id: npm-cache
+        id: ts-build-cache
         with:
           path: ./dist
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
           restore-keys: |
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
+
+      - name: Build on cache miss
+        run: npm run build:test
+        if: ${{ !ts-build-cache.cache-hit }}
 
       - name: Launch Tests
         run: npm run test:js:ci:coverage
