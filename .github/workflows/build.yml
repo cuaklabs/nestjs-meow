@@ -1,17 +1,20 @@
 name: build
 on:
-  push:
-    branches:
-      - master
   pull_request:
     paths:
       - '.github/workflows/build.yml'
       - 'packages/**/*.ts'
       - 'package-lock.json'
+    types:
+      - closed
+      - opened
+      - reopened
+      - synchronize
 jobs:
   build:
     name: Build Typescript
     runs-on: ubuntu-latest
+    if: "!(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false)"
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
@@ -48,6 +51,7 @@ jobs:
     needs: build
     name: (OS ${{ matrix.os }}, Node ${{ matrix.node-version }}) Setup machine, build Typescript and launch tests
     runs-on: ${{ matrix.os }}
+    if: "!(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false)"
     strategy:
       matrix:
         node-version:
