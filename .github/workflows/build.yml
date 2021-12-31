@@ -29,7 +29,7 @@ jobs:
         run: npm run lint
 
       - name: Compile source files
-        run: npm run build
+        run: npm run build:test
 
       - name: Get current git commit hash
         id: get-git-commit-hash
@@ -39,7 +39,7 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: ./node_modules/@cuaklabs
+          path: ./dist
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
           restore-keys: |
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: ./node_modules/@cuaklabs
+          path: ./dist
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
           restore-keys: |
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
