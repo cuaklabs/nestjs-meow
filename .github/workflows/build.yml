@@ -12,6 +12,7 @@ on:
       - synchronize
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     if: "!(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false)"
     steps:
@@ -47,6 +48,7 @@ jobs:
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
 
   test:
+    name: Test
     needs: build
     runs-on: ${{ matrix.os }}
     strategy:
@@ -95,9 +97,6 @@ jobs:
       - name: Launch Tests and generate coverage report
         run: npm run test:js:ci:coverage
         if: ${{ matrix.node-version == 16 && matrix.os == 'ubuntu-latest' }}
-
-      - name: WIP - show base ref
-        run: echo ${{ github.base_ref }}
 
       - name: Upload coverage to Codecov (base branch)
         uses: codecov/codecov-action@v2
