@@ -12,7 +12,6 @@ on:
       - synchronize
 jobs:
   build:
-    name: Build Typescript
     runs-on: ubuntu-latest
     if: "!(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false)"
     steps:
@@ -49,9 +48,7 @@ jobs:
 
   test:
     needs: build
-    name: (OS ${{ matrix.os }}, Node ${{ matrix.node-version }}) Setup machine, build Typescript and launch tests
     runs-on: ${{ matrix.os }}
-    if: "!(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false)"
     strategy:
       matrix:
         node-version:
@@ -99,9 +96,20 @@ jobs:
         run: npm run test:js:ci:coverage
         if: ${{ matrix.node-version == 16 && matrix.os == 'ubuntu-latest' }}
 
-      - name: Upload coverage to Codecov
+      - name: WIP - show base ref
+        run: echo ${{ github.base_ref }}
+
+      - name: Upload coverage to Codecov (base branch)
+        uses: codecov/codecov-action@v2
+        with:
+          flags: nestjs-firebase-admin
+          override_branch: ${{ github.base_ref }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+        if: ${{ matrix.node-version == 16 && matrix.os == 'ubuntu-latest' && (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+
+      - name: Upload coverage to Codecov (branch)
         uses: codecov/codecov-action@v2
         with:
           flags: nestjs-firebase-admin
           token: ${{ secrets.CODECOV_TOKEN }}
-        if: ${{ matrix.node-version == 16 && matrix.os == 'ubuntu-latest' }}
+        if: ${{ matrix.node-version == 16 && matrix.os == 'ubuntu-latest' && !(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true) }}
