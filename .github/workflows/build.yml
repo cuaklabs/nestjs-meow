@@ -76,6 +76,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # See https://github.com/actions/cache/issues/591#issuecomment-845121153
+      - name: "Use GNU tar instead BSD tar"
+        shell: cmd
+        run: echo C:\Program Files\Git\usr\bin>>"%GITHUB_PATH%"
+        if: matrix.os == 'windows-latest'
+
       - name: Get current git commit hash
         id: get-git-commit-hash
         run: |
