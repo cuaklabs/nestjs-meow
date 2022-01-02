@@ -15,7 +15,7 @@ function getJestProjectConfig(projectName, collectCoverageFrom, roots, testMatch
       },
     },
     moduleFileExtensions: ['ts', 'js', 'json'],
-    resolver: '<rootDir>/jest-resolver.js',
+    resolver: '<rootDir>/config/jest/jest-resolver.js',
     rootDir: '.',
     roots: roots,
     testEnvironment: 'node',
