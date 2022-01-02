@@ -10,7 +10,7 @@
   </a>
 
   <a href="https://codecov.io/gh/cuaklabs/nestjs-meow">
-    <img src="https://codecov.io/gh/cuaklabs/nestjs-meow/branch/master/graph/badge.svg?token=SA47S3AN5P" alt="Coverage status"/>
+    <img src="https://codecov.io/gh/cuaklabs/nestjs-meow/branch/master/graph/badge.svg?flag=nestjs-firebase-admin" alt="Coverage status"/>
   </a>
 </p>
 
