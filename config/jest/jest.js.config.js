@@ -1,4 +1,4 @@
-const { getJestJsProjectConfig, getJsTestMatch } = require('./jest.config.base');
+const { getJestJsProjectConfig } = require('./jest.config.base');
 
 const firebaseAdminJsUnitProject = getJestJsProjectConfig(
   'FirebaseAdmin-Unit',

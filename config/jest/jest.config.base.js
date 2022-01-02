@@ -1,6 +1,14 @@
 const tsRoot = '<rootDir>/packages';
 const jsRoot = '<rootDir>/dist';
 
+/**
+ * @param { !string } projectName Jest project's name
+ * @param { !Array<string> } collectCoverageFrom expressions to match to a file covered by IstambulJs
+ * @param { !Array<string> } roots Jest roots
+ * @param { !Array<string> } testMatch Expressions to match to test file paths
+ * @param { !Array<string> } testPathIgnorePatterns Expressions to match to ignored file paths by jest
+ * @returns { !import("@jest/types/build/Config").GlobalConfig } Jest config
+ */
 function getJestProjectConfig(projectName, collectCoverageFrom, roots, testMatch, testPathIgnorePatterns) {
   const projectConfig = {
     displayName: projectName,
@@ -26,23 +34,39 @@ function getJestProjectConfig(projectName, collectCoverageFrom, roots, testMatch
   return projectConfig;
 }
 
-function getJestJsProjectConfig(projectName, testPathIgnorePatterns, submodule, extension) {
-  const testMatch = [getJsTestMatch(submodule, extension)];
-  const collectCoverageFrom = [`${getJestJsProjectRoot(submodule)}/**/*.js`];
+/**
+ * @param { !string } projectName Jest project's name
+ * @param { !Array<string> } testPathIgnorePatterns Expressions to match to ignored file paths by jest
+ * @param { ?string } package Project package
+ * @param { ?string } extension Test extension to match
+ * @returns @returns { !import("@jest/types/build/Config").GlobalConfig } Jest config
+ */
+function getJestJsProjectConfig(projectName, testPathIgnorePatterns, package, extension) {
+  const testMatch = [getJsTestMatch(package, extension)];
+  const collectCoverageFrom = [`${getJestJsProjectRoot(package)}/**/*.js`];
 
   return getJestProjectConfig(
     projectName,
     collectCoverageFrom,
-    [getJestJsProjectRoot(submodule)],
+    [getJestJsProjectRoot(package)],
     testMatch,
     testPathIgnorePatterns,
   );
 }
 
-function getJestJsProjectRoot(submodule) {
-  return getJestProjectRoot(jsRoot, submodule);
+/**
+ * @param { ?string } package Project package
+ * @returns { !string }
+ */
+function getJestJsProjectRoot(package) {
+  return getJestProjectRoot(jsRoot, package);
 }
 
+/**
+ * @param { !string } package Project root
+ * @param { ?string } package Project package
+ * @returns { !string }
+ */
 function getJestProjectRoot(root, submodule) {
   let projectRoots;
 
@@ -55,6 +79,13 @@ function getJestProjectRoot(root, submodule) {
   return projectRoots;
 }
 
+/**
+ * @param { !string } projectName Jest project's name
+ * @param { !Array<string> } testPathIgnorePatterns Expressions to match to ignored file paths by jest
+ * @param { ?string } package Project package
+ * @param { ?string } extension Test extension to match
+ * @returns @returns { !import("@jest/types/build/Config").GlobalConfig } Jest config
+ */
 function getJestTsProjectConfig(projectName, testPathIgnorePatterns, submodule, extension) {
   const testMatch = [getTsTestMatch(submodule, extension)];
   const collectCoverageFrom = [`${getJestTsProjectRoot(submodule)}/**/*.ts`];
@@ -73,10 +104,20 @@ function getJestTsProjectConfig(projectName, testPathIgnorePatterns, submodule, 
   };
 }
 
+/**
+ * @param { ?string } package Project package
+ * @returns { !string }
+ */
 function getJestTsProjectRoot(submodule) {
   return getJestProjectRoot(tsRoot, submodule);
 }
 
+/**
+ * @param { !string } root Project root
+ * @param { ?string } submoduleName Project package
+ * @param { !string } testExtension Test extension files
+ * @returns { !string }
+ */
 function getSubmoduleTestMatch(root, submoduleName, testExtension) {
   let testMatch;
 
@@ -89,10 +130,20 @@ function getSubmoduleTestMatch(root, submoduleName, testExtension) {
   return testMatch;
 }
 
+/**
+ * @param { ?string } submoduleName Project package
+ * @param { !string } testExtension Test extension files
+ * @returns { !string }
+ */
 function getTsTestMatch(submoduleName, testExtension) {
   return getSubmoduleTestMatch(tsRoot, submoduleName, testExtension);
 }
 
+/**
+ * @param { ?string } submoduleName Project package
+ * @param { !string } testExtension Test extension files
+ * @returns { !string }
+ */
 function getJsTestMatch(submoduleName, testExtension) {
   return getSubmoduleTestMatch(jsRoot, submoduleName, testExtension);
 }
