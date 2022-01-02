@@ -11,8 +11,8 @@ on:
       - reopened
       - synchronize
 jobs:
-  test:
-    name: Test
+  test-coverage:
+    name: Test with coverage
     runs-on: ubuntu-latest
     steps:
       - run: 'echo "No actions required"'
