@@ -1,0 +1,12 @@
+coverage:
+  status:
+    project:
+      default: off
+      nestjs-firebase-admin:
+        flags: 
+          - nestjs-firebase-admin
+
+flags:
+  nestjs-firebase-admin:
+    paths:
+      - packages/nestjs-firebase-admin/
