@@ -28,11 +28,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install cuaklabs dependencies
+        run: npm run build:ci
+
       - name: Lint source files
         run: npm run lint
 
       - name: Compile source files
-        run: npm run build:test
+        run: npm run build:ci:test
 
       - name: Get current git commit hash
         id: get-git-commit-hash
@@ -42,7 +45,9 @@ jobs:
       - uses: actions/cache@v2
         id: ts-build-cache
         with:
-          path: ./dist
+          path: |
+            ./dist
+            ./node_modules/@cuaklabs
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
           restore-keys: |
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
@@ -90,22 +95,32 @@ jobs:
       - uses: actions/cache@v2
         id: ts-build-cache
         with:
-          path: ./dist
+          path: |
+            ./dist
+            ./node_modules/@cuaklabs
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
           restore-keys: |
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
 
-      - name: Build on cache miss
-        run: npm run build:test
+      - name: Build on cache miss (cuaklabs dependency files)
+        run: npm run build:ci
+        if: ${{ !steps.ts-build-cache.outputs.cache-hit }}
+
+      - name: Build on cache miss (test files)
+        run: npm run build:ci:test
         if: ${{ !steps.ts-build-cache.outputs.cache-hit }}
 
       - name: Launch Tests
         run: npm run test:js:ci
 
-  test-coverage:
+  test-coverage-package:
     name: Test with coverage
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - nestjs-firebase-admin
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
@@ -127,22 +142,28 @@ jobs:
       - uses: actions/cache@v2
         id: ts-build-cache
         with:
-          path: ./dist
+          path: |
+            ./dist
+            ./node_modules/@cuaklabs
           key: ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
           restore-keys: |
             ts-build-${{ steps.get-git-commit-hash.outputs.gitCommitHash }}
 
-      - name: Build on cache miss
-        run: npm run build:test
+      - name: Build on cache miss (cuaklabs dependency files)
+        run: npm run build:ci
+        if: ${{ !steps.ts-build-cache.outputs.cache-hit }}
+
+      - name: Build on cache miss (test files)
+        run: npm run build:ci:test
         if: ${{ !steps.ts-build-cache.outputs.cache-hit }}
 
       - name: Launch Tests and generate coverage report
-        run: npm run test:js:ci:coverage
+        run: npm run test:package:${{ matrix.package }}:js:ci:coverage
 
       - name: Upload coverage to Codecov (base branch)
         uses: codecov/codecov-action@v2
         with:
-          flags: nestjs-firebase-admin
+          flags: ${{ matrix.package }}
           override_branch: ${{ github.base_ref }}
           token: ${{ secrets.CODECOV_TOKEN }}
         if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true }}
@@ -150,6 +171,13 @@ jobs:
       - name: Upload coverage to Codecov (branch)
         uses: codecov/codecov-action@v2
         with:
-          flags: nestjs-firebase-admin
+          flags: ${{ matrix.package }}
           token: ${{ secrets.CODECOV_TOKEN }}
         if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+
+  test-coverage:
+    name: Test with coverage
+    needs: test-coverage-package
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "Done!"'
