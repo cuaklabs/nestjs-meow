@@ -177,7 +177,9 @@ jobs:
 
   test-coverage:
     name: Test with coverage
-    needs: test-coverage-package
+    needs:
+      - test
+      - test-coverage-package
     runs-on: ubuntu-latest
     steps:
       - run: 'echo "Done!"'
