@@ -1,6 +1,6 @@
 {
   "name": "@cuaklabs/nestjs-firebase-admin",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "meow meow meow",
   "keywords": [
     "nestjs",
@@ -19,8 +19,8 @@
     "url": "https://github.com/cuaklabs/nestjs-meow/issues"
   },
   "peerDependencies": {
-    "@nestjs/common": "^8.0.0",
-    "firebase-admin": "^10.0.0"
+    "@nestjs/common": "^9.0.3",
+    "firebase-admin": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
