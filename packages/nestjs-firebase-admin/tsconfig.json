@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@cuaklabs/nestjs-typescript-config/tsconfig.base.cjs.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "outDir": "./lib",
+    "rootDir": "./src"
+  },
+  "include": ["src"]
+}

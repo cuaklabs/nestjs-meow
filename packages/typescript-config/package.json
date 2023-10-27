@@ -1,0 +1,15 @@
+{
+  "author": "Multiple authors",
+  "name": "@cuaklabs/nestjs-typescript-config",
+  "description": "common typescript config for backend packages",
+  "license": "See license in \"LICENSE\" file",
+  "bugs": {
+    "url": "https://github.com/cuaklabs/nestjs-meow/issues"
+  },
+  "homepage": "https://github.com/cuaklabs/nestjs-meow#readme",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuaklabs/nestjs-meow.git"
+  }
+}
