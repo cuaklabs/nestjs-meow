@@ -15,6 +15,10 @@
       "inputs": ["src/**/*.ts"],
       "outputs": ["src/**/*.ts"]
     },
+    "format:check": {
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["src/**/*.ts"]
+    },
     "lint": {
       "dependsOn": ["^build"],
       "inputs": ["src/**/*.ts"]

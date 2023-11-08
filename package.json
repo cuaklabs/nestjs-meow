@@ -5,6 +5,7 @@
   "scripts": {
     "build": "turbo run build",
     "format": "turbo run format",
+    "format:check": "turbo run format:check",
     "lint": "turbo run lint",
     "prepare": "husky install",
     "test:integration:js": "turbo test:integration:js",
