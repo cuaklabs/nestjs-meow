@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { Inject, Injectable } from '@nestjs/common';
 import { App, initializeApp } from 'firebase-admin/app';
 import { AppCheck, getAppCheck } from 'firebase-admin/app-check';

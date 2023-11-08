@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { AppCheck } from 'firebase-admin/app-check';
 import { Auth } from 'firebase-admin/auth';
 import { Firestore } from 'firebase-admin/firestore';
