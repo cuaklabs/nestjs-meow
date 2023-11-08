@@ -1,9 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 
 import { DynamicModule } from '@nestjs/common';
-// eslint-disable-next-line import/no-unresolved
 import { Auth } from 'firebase-admin/auth';
-// eslint-disable-next-line import/no-unresolved
 import { Firestore } from 'firebase-admin/firestore';
 
 jest.mock('./FirebaseAdminCoreModule');

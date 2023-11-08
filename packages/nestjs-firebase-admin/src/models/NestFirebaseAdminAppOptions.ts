@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { AppOptions } from 'firebase-admin/app';
 
 import { NameAppOptionsPair } from './NameAppOptionsPair';

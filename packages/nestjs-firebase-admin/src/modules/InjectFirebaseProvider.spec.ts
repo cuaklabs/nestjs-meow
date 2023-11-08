@@ -3,7 +3,6 @@ import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 jest.mock('@nestjs/common', () => ({ Inject: jest.fn() }));
 
 import { Inject } from '@nestjs/common';
-// eslint-disable-next-line import/no-unresolved
 import { Auth } from 'firebase-admin/auth';
 
 jest.mock('./getFirebaseProviderId');

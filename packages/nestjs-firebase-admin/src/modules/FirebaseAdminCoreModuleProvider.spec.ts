@@ -1,7 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 
 jest.mock('firebase-admin/app');
-
 jest.mock('firebase-admin/app-check');
 jest.mock('firebase-admin/auth');
 jest.mock('firebase-admin/firestore');
