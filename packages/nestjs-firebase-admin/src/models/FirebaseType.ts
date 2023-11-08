@@ -10,24 +10,24 @@ import { SecurityRules } from 'firebase-admin/security-rules';
 import { Storage } from 'firebase-admin/storage';
 
 export type FirebaseType =
+  | typeof AppCheck
   | typeof Auth
   | typeof Firestore
-  | typeof Messaging
-  | typeof AppCheck
   | typeof Installations
   | typeof MachineLearning
+  | typeof Messaging
   | typeof ProjectManagement
   | typeof RemoteConfig
   | typeof SecurityRules
   | typeof Storage;
 
 export type FirebaseInstance =
+  | AppCheck
   | Auth
   | Firestore
-  | Messaging
-  | AppCheck
   | Installations
   | MachineLearning
+  | Messaging
   | ProjectManagement
   | RemoteConfig
   | SecurityRules
