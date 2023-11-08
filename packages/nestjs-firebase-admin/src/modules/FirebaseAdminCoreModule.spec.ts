@@ -9,12 +9,10 @@ import { NestFirebaseAdminAppFactoryAsyncOptions } from '../models/NestFirebaseA
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
 import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
-import {
-  APP_OPTIONS,
-  APP_OPTIONS_FACTORY,
-} from './firebaseAdminCoreInjectionSymbols';
+import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
+import { nestFirebaseAdminAppClassAsyncOptionsFactoryResolver } from './nestFirebaseAdminAppClassAsyncOptionsFactoryResolver';
 
 describe(FirebaseAdminCoreModule.name, () => {
   describe('.forRoot()', () => {
@@ -49,8 +47,7 @@ describe(FirebaseAdminCoreModule.name, () => {
       let nestFirebaseAdminAppOptions: NestFirebaseAdminAppFactoryAsyncOptions;
 
       beforeAll(() => {
-        nestFirebaseAdminAppOptions =
-          NestFirebaseAdminAppFactoryAsyncOptionsFixtures.any;
+        nestFirebaseAdminAppOptions = NestFirebaseAdminAppFactoryAsyncOptionsFixtures.any;
       });
 
       describe('when called', () => {
@@ -63,9 +60,7 @@ describe(FirebaseAdminCoreModule.name, () => {
             >
           ).mockReturnValueOnce(true);
 
-          result = FirebaseAdminCoreModule.forRootAsync(
-            nestFirebaseAdminAppOptions,
-          );
+          result = FirebaseAdminCoreModule.forRootAsync(nestFirebaseAdminAppOptions);
         });
 
         afterAll(() => {
@@ -89,12 +84,102 @@ describe(FirebaseAdminCoreModule.name, () => {
         });
 
         it('should call isNestFirebaseAdminAppFactoryAsyncOptions()', () => {
-          expect(
-            isNestFirebaseAdminAppFactoryAsyncOptions,
-          ).toHaveBeenCalledTimes(1);
-          expect(
-            isNestFirebaseAdminAppFactoryAsyncOptions,
-          ).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledTimes(1);
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
+        });
+      });
+    });
+
+    describe('having a NestFirebaseAdminAppFactoryAsyncOptions without inject', () => {
+      let nestFirebaseAdminAppOptions: NestFirebaseAdminAppFactoryAsyncOptions;
+
+      beforeAll(() => {
+        nestFirebaseAdminAppOptions = NestFirebaseAdminAppFactoryAsyncOptionsFixtures.withoutInject;
+      });
+
+      describe('when called', () => {
+        let result: unknown;
+
+        beforeAll(() => {
+          (
+            isNestFirebaseAdminAppFactoryAsyncOptions as unknown as jest.Mock<
+              typeof isNestFirebaseAdminAppFactoryAsyncOptions
+            >
+          ).mockReturnValueOnce(true);
+
+          result = FirebaseAdminCoreModule.forRootAsync(nestFirebaseAdminAppOptions);
+        });
+
+        afterAll(() => {
+          jest.clearAllMocks();
+        });
+
+        it('should return a DynamicModule', () => {
+          expect(result).toStrictEqual({
+            exports: [FirebaseAdminCoreModuleProvider],
+            imports: nestFirebaseAdminAppOptions.imports,
+            module: FirebaseAdminCoreModule,
+            providers: [
+              FirebaseAdminCoreModuleProvider,
+              {
+                inject: [],
+                provide: APP_OPTIONS,
+                useFactory: nestFirebaseAdminAppOptions.useFactory,
+              },
+            ],
+          });
+        });
+
+        it('should call isNestFirebaseAdminAppFactoryAsyncOptions()', () => {
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledTimes(1);
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
+        });
+      });
+    });
+
+    describe('having a NestFirebaseAdminAppFactoryAsyncOptions without imports', () => {
+      let nestFirebaseAdminAppOptions: NestFirebaseAdminAppFactoryAsyncOptions;
+
+      beforeAll(() => {
+        nestFirebaseAdminAppOptions = NestFirebaseAdminAppFactoryAsyncOptionsFixtures.withoutImports;
+      });
+
+      describe('when called', () => {
+        let result: unknown;
+
+        beforeAll(() => {
+          (
+            isNestFirebaseAdminAppFactoryAsyncOptions as unknown as jest.Mock<
+              typeof isNestFirebaseAdminAppFactoryAsyncOptions
+            >
+          ).mockReturnValueOnce(true);
+
+          result = FirebaseAdminCoreModule.forRootAsync(nestFirebaseAdminAppOptions);
+        });
+
+        afterAll(() => {
+          jest.clearAllMocks();
+        });
+
+        it('should return a DynamicModule', () => {
+          expect(result).toStrictEqual({
+            exports: [FirebaseAdminCoreModuleProvider],
+            imports: [],
+            module: FirebaseAdminCoreModule,
+            providers: [
+              FirebaseAdminCoreModuleProvider,
+              {
+                inject: nestFirebaseAdminAppOptions.inject,
+                provide: APP_OPTIONS,
+                useFactory: nestFirebaseAdminAppOptions.useFactory,
+              },
+            ],
+          });
+        });
+
+        it('should call isNestFirebaseAdminAppFactoryAsyncOptions()', () => {
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledTimes(1);
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
         });
       });
     });
@@ -103,9 +188,7 @@ describe(FirebaseAdminCoreModule.name, () => {
       let nestFirebaseAdminAppOptions: NestFirebaseAdminAppClassAsyncOptions;
 
       beforeAll(() => {
-        class ClassProviderFixture
-          implements NestFirebaseAdminAppOptionsFactory
-        {
+        class ClassProviderFixture implements NestFirebaseAdminAppOptionsFactory {
           public createNestFirebaseAdminAppOptions():
             | NestFirebaseAdminAppOptions
             | Promise<NestFirebaseAdminAppOptions> {
@@ -131,9 +214,7 @@ describe(FirebaseAdminCoreModule.name, () => {
             >
           ).mockReturnValueOnce(false);
 
-          result = FirebaseAdminCoreModule.forRootAsync(
-            nestFirebaseAdminAppOptions,
-          );
+          result = FirebaseAdminCoreModule.forRootAsync(nestFirebaseAdminAppOptions);
         });
 
         afterAll(() => {
@@ -154,21 +235,15 @@ describe(FirebaseAdminCoreModule.name, () => {
               {
                 inject: [APP_OPTIONS_FACTORY],
                 provide: APP_OPTIONS,
-                useFactory: expect.any(Function) as unknown as (
-                  ...args: unknown[]
-                ) => unknown,
+                useFactory: nestFirebaseAdminAppClassAsyncOptionsFactoryResolver,
               },
             ],
           });
         });
 
         it('should call isNestFirebaseAdminAppFactoryAsyncOptions()', () => {
-          expect(
-            isNestFirebaseAdminAppFactoryAsyncOptions,
-          ).toHaveBeenCalledTimes(1);
-          expect(
-            isNestFirebaseAdminAppFactoryAsyncOptions,
-          ).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledTimes(1);
+          expect(isNestFirebaseAdminAppFactoryAsyncOptions).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
         });
       });
     });

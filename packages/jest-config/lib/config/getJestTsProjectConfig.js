@@ -7,11 +7,7 @@ import getTestMatch from './getTestMatch.js';
  * @param { ?string } extension Test extension to match
  * @returns @returns { !import("jest").Config } Jest config
  */
-function getJestTsProjectConfig(
-  projectName,
-  testPathIgnorePatterns,
-  extension,
-) {
+function getJestTsProjectConfig(projectName, testPathIgnorePatterns, extension) {
   const testMatch = [getTestMatch(extension, true)];
 
   return {

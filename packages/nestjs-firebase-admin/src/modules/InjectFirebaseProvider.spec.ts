@@ -21,9 +21,7 @@ describe(InjectFirebaseProvider.name, () => {
 
     describe('when called', () => {
       beforeAll(async () => {
-        (
-          getFirebaseProviderId as jest.Mock<typeof getFirebaseProviderId>
-        ).mockReturnValueOnce(firebaseType);
+        (getFirebaseProviderId as jest.Mock<typeof getFirebaseProviderId>).mockReturnValueOnce(firebaseType);
 
         InjectFirebaseProvider(firebaseType);
       });
@@ -39,10 +37,7 @@ describe(InjectFirebaseProvider.name, () => {
 
       it('should call getFirebaseProviderId', () => {
         expect(getFirebaseProviderId).toHaveBeenCalledTimes(1);
-        expect(getFirebaseProviderId).toHaveBeenCalledWith(
-          firebaseType,
-          undefined,
-        );
+        expect(getFirebaseProviderId).toHaveBeenCalledWith(firebaseType, undefined);
       });
     });
   });
@@ -58,11 +53,7 @@ describe(InjectFirebaseProvider.name, () => {
 
     describe('when called', () => {
       beforeAll(async () => {
-        (
-          getFirebaseProviderId as unknown as jest.Mock<
-            typeof getFirebaseProviderId
-          >
-        ).mockReturnValueOnce(firebaseType);
+        (getFirebaseProviderId as unknown as jest.Mock<typeof getFirebaseProviderId>).mockReturnValueOnce(firebaseType);
 
         InjectFirebaseProvider(firebaseType, appName);
       });
@@ -78,10 +69,7 @@ describe(InjectFirebaseProvider.name, () => {
 
       it('should call getFirebaseProviderId', () => {
         expect(getFirebaseProviderId).toHaveBeenCalledTimes(1);
-        expect(getFirebaseProviderId).toHaveBeenCalledWith(
-          firebaseType,
-          appName,
-        );
+        expect(getFirebaseProviderId).toHaveBeenCalledWith(firebaseType, appName);
       });
     });
   });

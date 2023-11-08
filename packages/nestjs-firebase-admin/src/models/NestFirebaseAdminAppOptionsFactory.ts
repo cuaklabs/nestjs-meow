@@ -1,7 +1,5 @@
 import { NestFirebaseAdminAppOptions } from './NestFirebaseAdminAppOptions';
 
 export interface NestFirebaseAdminAppOptionsFactory {
-  createNestFirebaseAdminAppOptions: () =>
-    | NestFirebaseAdminAppOptions
-    | Promise<NestFirebaseAdminAppOptions>;
+  createNestFirebaseAdminAppOptions: () => NestFirebaseAdminAppOptions | Promise<NestFirebaseAdminAppOptions>;
 }

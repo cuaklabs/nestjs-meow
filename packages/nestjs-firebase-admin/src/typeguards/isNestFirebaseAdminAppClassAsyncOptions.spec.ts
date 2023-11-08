@@ -20,9 +20,7 @@ describe(isNestFirebaseAdminAppClassAsyncOptions.name, () => {
       let result: unknown;
 
       beforeAll(() => {
-        result = isNestFirebaseAdminAppClassAsyncOptions(
-          nestFirebaseAdminAppAsyncOptions,
-        );
+        result = isNestFirebaseAdminAppClassAsyncOptions(nestFirebaseAdminAppAsyncOptions);
       });
 
       it('should return false', () => {
@@ -36,9 +34,7 @@ describe(isNestFirebaseAdminAppClassAsyncOptions.name, () => {
 
     beforeAll(() => {
       class AppOptionsFactory implements NestFirebaseAdminAppOptionsFactory {
-        public createNestFirebaseAdminAppOptions():
-          | NestFirebaseAdminAppOptions
-          | Promise<NestFirebaseAdminAppOptions> {
+        public createNestFirebaseAdminAppOptions(): NestFirebaseAdminAppOptions | Promise<NestFirebaseAdminAppOptions> {
           return {};
         }
       }

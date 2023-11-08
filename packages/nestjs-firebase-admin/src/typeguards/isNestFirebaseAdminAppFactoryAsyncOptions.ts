@@ -4,7 +4,5 @@ import { NestFirebaseAdminAppFactoryAsyncOptions } from '../models/NestFirebaseA
 export function isNestFirebaseAdminAppFactoryAsyncOptions(
   value: NestFirebaseAdminAppAsyncOptions,
 ): value is NestFirebaseAdminAppFactoryAsyncOptions {
-  return (
-    (value as NestFirebaseAdminAppFactoryAsyncOptions).useFactory !== undefined
-  );
+  return (value as NestFirebaseAdminAppFactoryAsyncOptions).useFactory !== undefined;
 }

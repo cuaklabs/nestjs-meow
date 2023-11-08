@@ -4,7 +4,5 @@ import { NestFirebaseAdminAppClassAsyncOptions } from '../models/NestFirebaseAdm
 export function isNestFirebaseAdminAppClassAsyncOptions(
   value: NestFirebaseAdminAppAsyncOptions,
 ): value is NestFirebaseAdminAppClassAsyncOptions {
-  return (
-    (value as NestFirebaseAdminAppClassAsyncOptions).useClass !== undefined
-  );
+  return (value as NestFirebaseAdminAppClassAsyncOptions).useClass !== undefined;
 }

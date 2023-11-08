@@ -2,27 +2,18 @@ import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 
 import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
-import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
 import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
-import {
-  APP_OPTIONS,
-  APP_OPTIONS_FACTORY,
-} from './firebaseAdminCoreInjectionSymbols';
+import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
+import { nestFirebaseAdminAppClassAsyncOptionsFactoryResolver } from './nestFirebaseAdminAppClassAsyncOptionsFactoryResolver';
 
 @Global()
 @Module({})
 export class FirebaseAdminCoreModule {
-  public static forRootAsync(
-    nestFirebaseAdminAppAsyncOptions: NestFirebaseAdminAppAsyncOptions,
-  ): DynamicModule {
+  public static forRootAsync(nestFirebaseAdminAppAsyncOptions: NestFirebaseAdminAppAsyncOptions): DynamicModule {
     const moduleProviders: Provider[] = [FirebaseAdminCoreModuleProvider];
 
-    if (
-      isNestFirebaseAdminAppFactoryAsyncOptions(
-        nestFirebaseAdminAppAsyncOptions,
-      )
-    ) {
+    if (isNestFirebaseAdminAppFactoryAsyncOptions(nestFirebaseAdminAppAsyncOptions)) {
       moduleProviders.push({
         inject: nestFirebaseAdminAppAsyncOptions.inject ?? [],
         provide: APP_OPTIONS,
@@ -37,10 +28,7 @@ export class FirebaseAdminCoreModule {
       moduleProviders.push({
         inject: [APP_OPTIONS_FACTORY],
         provide: APP_OPTIONS,
-        useFactory: (
-          nestFirebaseAdminAppFactoryAsyncOptions: NestFirebaseAdminAppOptionsFactory,
-        ): Promise<NestFirebaseAdminAppOptions> | NestFirebaseAdminAppOptions =>
-          nestFirebaseAdminAppFactoryAsyncOptions.createNestFirebaseAdminAppOptions(),
+        useFactory: nestFirebaseAdminAppClassAsyncOptionsFactoryResolver,
       });
     }
 
@@ -52,9 +40,7 @@ export class FirebaseAdminCoreModule {
     };
   }
 
-  public static forRoot(
-    nestFirebaseAdminAppOptions: NestFirebaseAdminAppOptions,
-  ): DynamicModule {
+  public static forRoot(nestFirebaseAdminAppOptions: NestFirebaseAdminAppOptions): DynamicModule {
     return {
       exports: [FirebaseAdminCoreModuleProvider],
       module: FirebaseAdminCoreModule,

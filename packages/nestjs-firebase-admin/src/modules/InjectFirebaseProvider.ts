@@ -7,7 +7,5 @@ import { getFirebaseProviderId } from './getFirebaseProviderId';
 export const InjectFirebaseProvider: (
   firebaseType: FirebaseType,
   appName?: string | undefined,
-) => ParameterDecorator = (
-  firebaseType: FirebaseType,
-  appName?: string,
-): ParameterDecorator => Inject(getFirebaseProviderId(firebaseType, appName));
+) => ParameterDecorator = (firebaseType: FirebaseType, appName?: string): ParameterDecorator =>
+  Inject(getFirebaseProviderId(firebaseType, appName));

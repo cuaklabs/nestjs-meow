@@ -12,4 +12,22 @@ export class NestFirebaseAdminAppFactoryAsyncOptionsFixtures {
 
     return fixture;
   }
+
+  public static get withoutImports(): jest.Mocked<NestFirebaseAdminAppFactoryAsyncOptions> {
+    const fixture: jest.Mocked<NestFirebaseAdminAppFactoryAsyncOptions> = {
+      inject: [],
+      useFactory: jest.fn(),
+    };
+
+    return fixture;
+  }
+
+  public static get withoutInject(): jest.Mocked<NestFirebaseAdminAppFactoryAsyncOptions> {
+    const fixture: jest.Mocked<NestFirebaseAdminAppFactoryAsyncOptions> = {
+      imports: [],
+      useFactory: jest.fn(),
+    };
+
+    return fixture;
+  }
 }

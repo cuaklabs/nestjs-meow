@@ -31,9 +31,7 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
 
       describe('when called', () => {
         beforeAll(() => {
-          (
-            initializeApp as jest.Mock<typeof initializeApp>
-          ).mockReturnValueOnce({} as Partial<App> as App);
+          (initializeApp as jest.Mock<typeof initializeApp>).mockReturnValueOnce({} as Partial<App> as App);
 
           new FirebaseAdminCoreModuleProvider(appOptionsFixture);
         });
@@ -63,9 +61,7 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
 
       describe('when called', () => {
         beforeAll(() => {
-          (
-            initializeApp as jest.Mock<typeof initializeApp>
-          ).mockReturnValueOnce({} as Partial<App> as App);
+          (initializeApp as jest.Mock<typeof initializeApp>).mockReturnValueOnce({} as Partial<App> as App);
 
           new FirebaseAdminCoreModuleProvider(nameAppOptionsPairFixture);
         });
@@ -75,14 +71,9 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
         });
 
         it('should call initializeApp()', () => {
-          expect(initializeApp).toHaveBeenCalledTimes(
-            nameAppOptionsPairFixture.length,
-          );
+          expect(initializeApp).toHaveBeenCalledTimes(nameAppOptionsPairFixture.length);
 
-          for (const [
-            i,
-            nameAppOptionsPair,
-          ] of nameAppOptionsPairFixture.entries()) {
+          for (const [i, nameAppOptionsPair] of nameAppOptionsPairFixture.entries()) {
             expect(initializeApp).toHaveBeenNthCalledWith(
               i + 1,
               nameAppOptionsPair.appOptions,
@@ -109,20 +100,16 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
         authFixture = {} as Partial<Auth> as Auth;
         appFixture = {} as Partial<App> as App;
 
-        (initializeApp as jest.Mock<typeof initializeApp>).mockReturnValueOnce(
-          appFixture,
-        );
+        (initializeApp as jest.Mock<typeof initializeApp>).mockReturnValueOnce(appFixture);
         (getAuth as jest.Mock<typeof getAuth>).mockReturnValueOnce(authFixture);
 
         const appOptionsFixture: AppOptions = {};
 
-        const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider =
-          new FirebaseAdminCoreModuleProvider(appOptionsFixture);
-
-        result = firebaseAdminCoreModuleProvider.getProvider(
-          firebaseTypeFixture,
-          appName,
+        const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider = new FirebaseAdminCoreModuleProvider(
+          appOptionsFixture,
         );
+
+        result = firebaseAdminCoreModuleProvider.getProvider(firebaseTypeFixture, appName);
       });
 
       afterAll(() => {
@@ -156,22 +143,16 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
           firebaseTypeFixture = Auth;
           appFixture = {} as Partial<App> as App;
 
-          (
-            initializeApp as jest.Mock<typeof initializeApp>
-          ).mockReturnValueOnce(appFixture);
+          (initializeApp as jest.Mock<typeof initializeApp>).mockReturnValueOnce(appFixture);
 
-          const appOptionsFixture: NestFirebaseAdminAppOptions = [
-            { appOptions: {}, name: 'other-app-name-example' },
-          ];
+          const appOptionsFixture: NestFirebaseAdminAppOptions = [{ appOptions: {}, name: 'other-app-name-example' }];
 
-          const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider =
-            new FirebaseAdminCoreModuleProvider(appOptionsFixture);
+          const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider = new FirebaseAdminCoreModuleProvider(
+            appOptionsFixture,
+          );
 
           try {
-            firebaseAdminCoreModuleProvider.getProvider(
-              firebaseTypeFixture,
-              appName,
-            );
+            firebaseAdminCoreModuleProvider.getProvider(firebaseTypeFixture, appName);
           } catch (error: unknown) {
             result = error;
           }
@@ -183,9 +164,7 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
 
         it('should throw a Error', () => {
           expect(result).toBeInstanceOf(Error);
-          expect((result as Error).message).toBe(
-            'App does not exist. Expecting a named app, found no app name.',
-          );
+          expect((result as Error).message).toBe('App does not exist. Expecting a named app, found no app name.');
         });
       });
     });
@@ -207,22 +186,16 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
           firebaseTypeFixture = Auth;
           appFixture = {} as Partial<App> as App;
 
-          (
-            initializeApp as jest.Mock<typeof initializeApp>
-          ).mockReturnValueOnce(appFixture);
+          (initializeApp as jest.Mock<typeof initializeApp>).mockReturnValueOnce(appFixture);
 
-          const appOptionsFixture: NestFirebaseAdminAppOptions = [
-            { appOptions: {}, name: 'other-app-name-example' },
-          ];
+          const appOptionsFixture: NestFirebaseAdminAppOptions = [{ appOptions: {}, name: 'other-app-name-example' }];
 
-          const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider =
-            new FirebaseAdminCoreModuleProvider(appOptionsFixture);
+          const firebaseAdminCoreModuleProvider: FirebaseAdminCoreModuleProvider = new FirebaseAdminCoreModuleProvider(
+            appOptionsFixture,
+          );
 
           try {
-            firebaseAdminCoreModuleProvider.getProvider(
-              firebaseTypeFixture,
-              appName,
-            );
+            firebaseAdminCoreModuleProvider.getProvider(firebaseTypeFixture, appName);
           } catch (error: unknown) {
             result = error;
           }
@@ -234,9 +207,7 @@ describe(FirebaseAdminCoreModuleProvider.name, () => {
 
         it('should throw a Error', () => {
           expect(result).toBeInstanceOf(Error);
-          expect((result as Error).message).toBe(
-            `No app with name "${appName}" was found.`,
-          );
+          expect((result as Error).message).toBe(`No app with name "${appName}" was found.`);
         });
       });
     });

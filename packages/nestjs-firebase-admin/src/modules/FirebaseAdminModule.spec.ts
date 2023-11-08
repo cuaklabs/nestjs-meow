@@ -38,11 +38,9 @@ describe(FirebaseAdminModule.name, () => {
           module: FirebaseAdminCoreModule,
         };
 
-        (
-          FirebaseAdminCoreModule.forRoot as jest.Mock<
-            typeof FirebaseAdminCoreModule.forRoot
-          >
-        ).mockReturnValueOnce(dynamicModuleFixture);
+        (FirebaseAdminCoreModule.forRoot as jest.Mock<typeof FirebaseAdminCoreModule.forRoot>).mockReturnValueOnce(
+          dynamicModuleFixture,
+        );
 
         result = FirebaseAdminModule.forRoot(nestFirebaseAdminAppOptions);
       });
@@ -60,9 +58,7 @@ describe(FirebaseAdminModule.name, () => {
 
       it('should call FirebaseAdminCoreModule.forRoot()', () => {
         expect(FirebaseAdminCoreModule.forRoot).toHaveBeenCalledTimes(1);
-        expect(FirebaseAdminCoreModule.forRoot).toHaveBeenCalledWith(
-          nestFirebaseAdminAppOptions,
-        );
+        expect(FirebaseAdminCoreModule.forRoot).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
       });
     });
   });
@@ -72,8 +68,7 @@ describe(FirebaseAdminModule.name, () => {
     let dynamicModuleFixture: DynamicModule;
 
     beforeAll(() => {
-      nestFirebaseAdminAppOptions =
-        NestFirebaseAdminAppFactoryAsyncOptionsFixtures.any;
+      nestFirebaseAdminAppOptions = NestFirebaseAdminAppFactoryAsyncOptionsFixtures.any;
       dynamicModuleFixture = {
         module: FirebaseAdminCoreModule,
       };
@@ -84,9 +79,7 @@ describe(FirebaseAdminModule.name, () => {
 
       beforeAll(() => {
         (
-          FirebaseAdminCoreModule.forRootAsync as jest.Mock<
-            typeof FirebaseAdminCoreModule.forRootAsync
-          >
+          FirebaseAdminCoreModule.forRootAsync as jest.Mock<typeof FirebaseAdminCoreModule.forRootAsync>
         ).mockReturnValueOnce(dynamicModuleFixture);
 
         result = FirebaseAdminModule.forRootAsync(nestFirebaseAdminAppOptions);
@@ -105,9 +98,7 @@ describe(FirebaseAdminModule.name, () => {
 
       it('should call FirebaseAdminCoreModule.forRootAsync()', () => {
         expect(FirebaseAdminCoreModule.forRootAsync).toHaveBeenCalledTimes(1);
-        expect(FirebaseAdminCoreModule.forRootAsync).toHaveBeenCalledWith(
-          nestFirebaseAdminAppOptions,
-        );
+        expect(FirebaseAdminCoreModule.forRootAsync).toHaveBeenCalledWith(nestFirebaseAdminAppOptions);
       });
     });
   });
@@ -125,11 +116,8 @@ describe(FirebaseAdminModule.name, () => {
       let result: unknown;
 
       beforeAll(() => {
-        (
-          getFirebaseProviderId as jest.Mock<typeof getFirebaseProviderId>
-        ).mockImplementation(
-          (firebaseType: FirebaseType, _appName?: string | undefined) =>
-            firebaseType,
+        (getFirebaseProviderId as jest.Mock<typeof getFirebaseProviderId>).mockImplementation(
+          (firebaseType: FirebaseType, _appName?: string | undefined) => firebaseType,
         );
 
         result = FirebaseAdminModule.injectProviders(firebaseTypes, appName);
@@ -140,15 +128,9 @@ describe(FirebaseAdminModule.name, () => {
       });
 
       it('should call getFirebaseProviderId', () => {
-        expect(getFirebaseProviderId).toHaveBeenCalledTimes(
-          firebaseTypes.length,
-        );
+        expect(getFirebaseProviderId).toHaveBeenCalledTimes(firebaseTypes.length);
         for (const [i, firebaseType] of firebaseTypes.entries()) {
-          expect(getFirebaseProviderId).toHaveBeenNthCalledWith(
-            i + 1,
-            firebaseType,
-            appName,
-          );
+          expect(getFirebaseProviderId).toHaveBeenNthCalledWith(i + 1, firebaseType, appName);
         }
       });
 
@@ -160,9 +142,7 @@ describe(FirebaseAdminModule.name, () => {
             return {
               inject: [FirebaseAdminCoreModuleProvider],
               provide: firebaseType,
-              useFactory: expect.any(Function) as unknown as (
-                ...args: unknown[]
-              ) => unknown,
+              useFactory: expect.any(Function) as unknown as (...args: unknown[]) => unknown,
             };
           }),
         });
