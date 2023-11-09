@@ -11,9 +11,9 @@ import { getRemoteConfig, RemoteConfig } from 'firebase-admin/remote-config';
 import { getSecurityRules, SecurityRules } from 'firebase-admin/security-rules';
 import { getStorage, Storage } from 'firebase-admin/storage';
 
+import { APP_OPTIONS } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseInstance, FirebaseType } from '../models/FirebaseType';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
-import { APP_OPTIONS } from './firebaseAdminCoreInjectionSymbols';
 
 const DEFAULT_APP: string = 'default';
 @Injectable()

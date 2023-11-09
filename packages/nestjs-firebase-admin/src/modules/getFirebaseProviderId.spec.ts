@@ -2,8 +2,8 @@ import { beforeAll, describe, expect, it } from '@jest/globals';
 
 import { Auth } from 'firebase-admin/auth';
 
-import { FirebaseType } from '../models/FirebaseType';
 import { getFirebaseProviderId } from './getFirebaseProviderId';
+import { FirebaseType } from '../models/FirebaseType';
 
 describe(getFirebaseProviderId.name, () => {
   describe('having a FirebaseType', () => {

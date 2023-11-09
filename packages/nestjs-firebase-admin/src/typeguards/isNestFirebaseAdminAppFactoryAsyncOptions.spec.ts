@@ -1,10 +1,10 @@
 import { beforeAll, describe, expect, it } from '@jest/globals';
 
+import { isNestFirebaseAdminAppFactoryAsyncOptions } from './isNestFirebaseAdminAppFactoryAsyncOptions';
 import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
 import { NestFirebaseAdminAppClassAsyncOptions } from '../models/NestFirebaseAdminAppClassAsyncOptions';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
-import { isNestFirebaseAdminAppFactoryAsyncOptions } from './isNestFirebaseAdminAppFactoryAsyncOptions';
 
 describe(isNestFirebaseAdminAppFactoryAsyncOptions.name, () => {
   describe('having a isNestFirebaseAdminAppFactoryAsyncOptions which is not a isNestFirebaseAdminAppFactoryAsyncOptions', () => {

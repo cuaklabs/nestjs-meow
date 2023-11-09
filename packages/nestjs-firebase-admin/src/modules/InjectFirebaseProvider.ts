@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 
-import { FirebaseType } from '../models/FirebaseType';
 import { getFirebaseProviderId } from './getFirebaseProviderId';
+import { FirebaseType } from '../models/FirebaseType';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const InjectFirebaseProvider: (

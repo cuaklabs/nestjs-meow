@@ -15,10 +15,10 @@ jest.mock('firebase-admin/storage');
 import { App, AppOptions, initializeApp } from 'firebase-admin/app';
 import { Auth, getAuth } from 'firebase-admin/auth';
 
+import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 import { FirebaseType } from '../models/FirebaseType';
 import { NameAppOptionsPair } from '../models/NameAppOptionsPair';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
-import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 
 describe(FirebaseAdminCoreModuleProvider.name, () => {
   describe('.constructor()', () => {

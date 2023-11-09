@@ -7,15 +7,15 @@ import { Firestore } from 'firebase-admin/firestore';
 jest.mock('./FirebaseAdminCoreModule');
 jest.mock('./getFirebaseProviderId');
 
+import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
+import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
+import { FirebaseAdminModule } from './FirebaseAdminModule';
+import { getFirebaseProviderId } from './getFirebaseProviderId';
 import { NestFirebaseAdminAppFactoryAsyncOptionsFixtures } from '../fixtures/NestFirebaseAdminAppFactoryAsyncOptionsFixtures';
 import { NestFirebaseAdminAppOptionsFixtures } from '../fixtures/NestFirebaseAdminAppOptionsFixtures';
 import { FirebaseType } from '../models/FirebaseType';
 import { NestFirebaseAdminAppFactoryAsyncOptions } from '../models/NestFirebaseAdminAppFactoryAsyncOptions';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
-import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
-import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
-import { FirebaseAdminModule } from './FirebaseAdminModule';
-import { getFirebaseProviderId } from './getFirebaseProviderId';
 
 describe(FirebaseAdminModule.name, () => {
   describe('.forRoot()', () => {

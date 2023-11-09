@@ -1,11 +1,11 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
-import { FirebaseType } from '../models/FirebaseType';
-import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
-import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 import { getFirebaseProviderId } from './getFirebaseProviderId';
+import { FirebaseType } from '../models/FirebaseType';
+import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
+import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 
 @Module({})
 export class FirebaseAdminModule {

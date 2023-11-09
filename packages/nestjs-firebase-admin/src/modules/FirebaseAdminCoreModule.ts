@@ -1,11 +1,11 @@
 import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 
-import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
-import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
-import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
 import { createNestFirebaseAdminAppOptionsFactory } from './createNestFirebaseAdminAppOptionsFactory';
 import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
+import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
+import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
+import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
 
 @Global()
 @Module({})
