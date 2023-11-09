@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "version": "1.0.0",
   "description": "Meow meow meow",
   "scripts": {
     "build": "turbo run build",
@@ -8,6 +9,7 @@
     "format:check": "turbo run format:check",
     "lint": "turbo run lint",
     "prepare": "husky install",
+    "publish:packages": "turbo run publish:package",
     "test:integration:js": "turbo test:integration:js",
     "test:js": "turbo run test:js",
     "test:js:coverage": "turbo run test:js:coverage",
