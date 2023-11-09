@@ -2,6 +2,10 @@ import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 
 jest.mock('../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions');
 
+import { createNestFirebaseAdminAppOptionsFactory } from './createNestFirebaseAdminAppOptionsFactory';
+import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
+import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
+import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 import { NestFirebaseAdminAppFactoryAsyncOptionsFixtures } from '../fixtures/NestFirebaseAdminAppFactoryAsyncOptionsFixtures';
 import { NestFirebaseAdminAppOptionsFixtures } from '../fixtures/NestFirebaseAdminAppOptionsFixtures';
 import { NestFirebaseAdminAppClassAsyncOptions } from '../models/NestFirebaseAdminAppClassAsyncOptions';
@@ -9,10 +13,6 @@ import { NestFirebaseAdminAppFactoryAsyncOptions } from '../models/NestFirebaseA
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
 import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
-import { createNestFirebaseAdminAppOptionsFactory } from './createNestFirebaseAdminAppOptionsFactory';
-import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
-import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
-import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
 
 describe(FirebaseAdminCoreModule.name, () => {
   describe('.forRoot()', () => {

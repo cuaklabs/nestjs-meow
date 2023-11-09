@@ -7,9 +7,9 @@ import { Auth } from 'firebase-admin/auth';
 
 jest.mock('./getFirebaseProviderId');
 
-import { FirebaseType } from '../models/FirebaseType';
 import { getFirebaseProviderId } from './getFirebaseProviderId';
 import { InjectFirebaseProvider } from './InjectFirebaseProvider';
+import { FirebaseType } from '../models/FirebaseType';
 
 describe(InjectFirebaseProvider.name, () => {
   describe('having a firebaseType', () => {
