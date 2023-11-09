@@ -5,7 +5,7 @@
   },
   "description": "Backend ESLint config for nestjs meow packages",
   "devDependencies": {
-    "eslint": "8.52.0"
+    "eslint": "8.53.0"
   },
   "homepage": "https://github.com/cuaklabs/nestjs-meow#readme",
   "license": "See license in \"LICENSE\" file",
