@@ -35,16 +35,13 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: package.json
 
-      - name: Install standard-version and conventional-changelog
-        run : pnpm i -g standard-version conventional-changelog-cli
+      - name: Install standard-version
+        run : pnpm i -g standard-version
 
       - name: Config git
         run: |
           git config --global user.email "${{ github.event.sender.email }}"
           git config --global user.name "${{ github.event.sender.login }}"
-
-      - name: Create changelog
-        run: conventional-changelog -p conventionalcommits -r 0
 
       - name: Apply standard-version
         run: |
