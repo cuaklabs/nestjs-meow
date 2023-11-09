@@ -3,9 +3,9 @@ import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { NestFirebaseAdminAppOptionsFixtures } from '../fixtures/NestFirebaseAdminAppOptionsFixtures';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
-import { nestFirebaseAdminAppClassAsyncOptionsFactoryResolver } from './nestFirebaseAdminAppClassAsyncOptionsFactoryResolver';
+import { createNestFirebaseAdminAppOptionsFactory } from './createNestFirebaseAdminAppOptionsFactory';
 
-describe(nestFirebaseAdminAppClassAsyncOptionsFactoryResolver.name, () => {
+describe(createNestFirebaseAdminAppOptionsFactory.name, () => {
   describe('when called', () => {
     let nestFirebaseAdminAppFactoryAsyncOptionsFixture: jest.Mocked<NestFirebaseAdminAppOptionsFactory>;
     let nestFirebaseAdminAppOptionsFixture: NestFirebaseAdminAppOptions;
@@ -23,7 +23,7 @@ describe(nestFirebaseAdminAppClassAsyncOptionsFactoryResolver.name, () => {
           | Promise<NestFirebaseAdminAppOptions>,
       );
 
-      result = nestFirebaseAdminAppClassAsyncOptionsFactoryResolver(nestFirebaseAdminAppFactoryAsyncOptionsFixture);
+      result = createNestFirebaseAdminAppOptionsFactory(nestFirebaseAdminAppFactoryAsyncOptionsFixture);
     });
 
     afterAll(() => {

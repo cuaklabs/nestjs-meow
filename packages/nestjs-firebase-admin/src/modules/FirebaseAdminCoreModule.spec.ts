@@ -9,10 +9,10 @@ import { NestFirebaseAdminAppFactoryAsyncOptions } from '../models/NestFirebaseA
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { NestFirebaseAdminAppOptionsFactory } from '../models/NestFirebaseAdminAppOptionsFactory';
 import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
+import { createNestFirebaseAdminAppOptionsFactory } from './createNestFirebaseAdminAppOptionsFactory';
 import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseAdminCoreModule } from './FirebaseAdminCoreModule';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
-import { nestFirebaseAdminAppClassAsyncOptionsFactoryResolver } from './nestFirebaseAdminAppClassAsyncOptionsFactoryResolver';
 
 describe(FirebaseAdminCoreModule.name, () => {
   describe('.forRoot()', () => {
@@ -235,7 +235,7 @@ describe(FirebaseAdminCoreModule.name, () => {
               {
                 inject: [APP_OPTIONS_FACTORY],
                 provide: APP_OPTIONS,
-                useFactory: nestFirebaseAdminAppClassAsyncOptionsFactoryResolver,
+                useFactory: createNestFirebaseAdminAppOptionsFactory,
               },
             ],
           });

@@ -3,9 +3,9 @@ import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 import { NestFirebaseAdminAppAsyncOptions } from '../models/NestFirebaseAdminAppAsyncOptions';
 import { NestFirebaseAdminAppOptions } from '../models/NestFirebaseAdminAppOptions';
 import { isNestFirebaseAdminAppFactoryAsyncOptions } from '../typeguards/isNestFirebaseAdminAppFactoryAsyncOptions';
+import { createNestFirebaseAdminAppOptionsFactory } from './createNestFirebaseAdminAppOptionsFactory';
 import { APP_OPTIONS, APP_OPTIONS_FACTORY } from './firebaseAdminCoreInjectionSymbols';
 import { FirebaseAdminCoreModuleProvider } from './FirebaseAdminCoreModuleProvider';
-import { nestFirebaseAdminAppClassAsyncOptionsFactoryResolver } from './nestFirebaseAdminAppClassAsyncOptionsFactoryResolver';
 
 @Global()
 @Module({})
@@ -28,7 +28,7 @@ export class FirebaseAdminCoreModule {
       moduleProviders.push({
         inject: [APP_OPTIONS_FACTORY],
         provide: APP_OPTIONS,
-        useFactory: nestFirebaseAdminAppClassAsyncOptionsFactoryResolver,
+        useFactory: createNestFirebaseAdminAppOptionsFactory,
       });
     }
 
