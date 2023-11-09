@@ -1,16 +1,18 @@
-# npm installed packages
-node_modules/
+### Turbo ###
+/.turbo
 
-# Typescript compiled files
-dist/
+### Visual Studio Code ###
+/.vscode/*
+!/.vscode/settings.json
+!/.vscode/tasks.json
+!/.vscode/launch.json
+!/.vscode/extensions.json
+!/.vscode/*.code-snippets
 
-packages/**/*.d.ts
-packages/**/*.js
+# node modules
+/node_modules/
 
-# TypeScript cache
-*.tsbuildinfo
-
-# IstambulJs coverage
-/coverage
-
-/tmp
+### npm lock files (consider https://github.com/yarnpkg/yarn/issues/838#issuecomment-253362537 as reference)
+/package-lock.json
+/pnpm-lock.yaml
+/yarn.lock

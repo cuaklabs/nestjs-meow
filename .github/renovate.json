@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":pinAllExceptPeerDependencies",
+    ":disableRateLimiting"
+  ],
+  "schedule": [
+    "at any time"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "All non-major dependencies",
+      "groupSlug": "all-non-major-dependencies",
+      "automerge": true,
+      "labels": ["dependencies"]
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "All major dependencies",
+      "groupSlug": "all-major-dependencies",
+      "labels": ["dependencies", "breaking"]
+    },
+    {
+      "matchPackagePatterns": ["node"],
+      "groupName": "Non-major node version",
+      "groupSlug": "non-major-node-version",
+      "automerge": true,
+      "matchDatasources": ["docker"],
+      "allowedVersions": "<21.0.0",
+      "labels": ["docker-update"]
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "All non-major docker dependencies",
+      "groupSlug": "all-non-major-docker-dependencies",
+      "automerge": true,
+      "matchDatasources": ["docker"],
+      "labels": ["docker-update"]
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "All major docker dependencies",
+      "groupSlug": "all-major-docker-dependencies",
+      "matchDatasources": ["docker"],
+      "labels": ["docker-update", "breaking"]
+    }
+  ]
+}

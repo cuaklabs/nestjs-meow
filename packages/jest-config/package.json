@@ -1,0 +1,23 @@
+{
+  "author": "Multiple authors",
+  "bugs": {
+    "url": "https://github.com/cuaklabs/nestjs-meow/issues"
+  },
+  "description": "Backend jest config for nestjs meow packages",
+  "devDependencies": {
+    "@jest/types": "29.6.3"
+  },
+  "exports": "./lib/index.js",
+  "homepage": "https://github.com/cuaklabs/nestjs-meow#readme",
+  "license": "See license in \"LICENSE\" file",
+  "name": "@cuaklabs/nestjs-jest-config",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuaklabs/nestjs-meow.git"
+  },
+  "scripts": {
+    "format": "prettier --write ./lib/**/*.js"
+  },
+  "type": "module"
+}
