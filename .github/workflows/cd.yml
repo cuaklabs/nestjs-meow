@@ -8,15 +8,15 @@ on:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-    
-jobs: 
+
+jobs:
   publish-packages:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [20.x]
-        
+
     steps:
       - uses: actions/checkout@v4
 
@@ -32,9 +32,8 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: package.json
           registry-url: 'https://registry.npmjs.org'
-        
+
       - name: Publish package  
         run: pnpm publish:packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      

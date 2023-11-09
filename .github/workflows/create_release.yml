@@ -1,8 +1,8 @@
 name: Create release
 
-on: 
+on:
   workflow_dispatch:
-    
+
 jobs:
   create-release:
     runs-on: ubuntu-latest
@@ -12,9 +12,16 @@ jobs:
         node-version: [20.x]
 
     steps:
+      - name: fetch app token
+        id: fetch-app-token
+        uses: getsentry/action-github-app-token@v2
+        with:
+          app_id: ${{ env.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GIT_TOKEN }}
+          token: ${{ steps.fetch-app-token.outputs.token }}
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.4.0
@@ -38,7 +45,7 @@ jobs:
 
       - name: Create changelog
         run: conventional-changelog -p conventionalcommits -r 0
-          
+
       - name: Apply standard-version
         run: |
           standard-version -t ""  --no-verify --first-release
@@ -46,12 +53,12 @@ jobs:
       - name: Get new version
         id: version
         run: echo "VERSION=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
-      
+
       - name: Fix packages
         run: |
           sudo apt-get install moreutils
           jq '.version = "${{ steps.version.outputs.VERSION }}"' packages/nestjs-firebase-admin/package.json | sponge packages/nestjs-firebase-admin/package.json
-          
+
       - name: Commit release
         run: |
           git add .
@@ -64,5 +71,3 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create ${{ steps.version.outputs.VERSION }} --generate-notes
-        
-      
