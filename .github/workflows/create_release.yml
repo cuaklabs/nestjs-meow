@@ -61,7 +61,7 @@ jobs:
           git add .
           git commit --no-verify -m "chore(release): ${{ steps.version.outputs.VERSION }}"
           git tag ${{ steps.version.outputs.VERSION }}
-          git push
+          git push --force
           git push --tags
 
       - name: Create release
