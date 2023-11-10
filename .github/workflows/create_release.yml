@@ -59,8 +59,9 @@ jobs:
       - name: Commit release
         run: |
           git add .
-          git commit --amend --no-verify --no-edit
-          git push --force
+          git commit --no-verify -m "chore(release): ${{ steps.version.outputs.VERSION }}"
+          git tag ${{ steps.version.outputs.VERSION }}
+          git push
           git push --tags
 
       - name: Create release
