@@ -16,7 +16,7 @@ jobs:
         id: fetch-app-token
         uses: getsentry/action-github-app-token@v2
         with:
-          app_id: ${{ env.APP_ID }}
+          app_id: ${{ vars.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@v4
