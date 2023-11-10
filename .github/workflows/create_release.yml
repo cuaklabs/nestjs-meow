@@ -12,16 +12,7 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - name: fetch app token
-        id: fetch-app-token
-        uses: getsentry/action-github-app-token@v2
-        with:
-          app_id: ${{ vars.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-
       - uses: actions/checkout@v4
-        with:
-          token: ${{ steps.fetch-app-token.outputs.token }}
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.4.0
@@ -44,8 +35,7 @@ jobs:
           git config --global user.name "${{ github.event.sender.login }}"
 
       - name: Apply standard-version
-        run: |
-          standard-version -t ""  --no-verify --first-release
+        run: standard-version -t ""  --no-verify --first-release
 
       - name: Get new version
         id: version
@@ -60,12 +50,18 @@ jobs:
         run: |
           git add .
           git commit --no-verify -m "chore(release): ${{ steps.version.outputs.VERSION }}"
+          git checkout -b release/${{ steps.version.outputs.VERSION }}
           git tag ${{ steps.version.outputs.VERSION }}
-          git push --force
+          git push origin release/${{ steps.version.outputs.VERSION }}
           git push --tags
 
-      - name: Create release
+      - name: Create release PR
         env:
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ steps.version.outputs.VERSION }} --generate-notes
+          gh pr create \
+          --title "chore(release): ${{ steps.version.outputs.VERSION }}" \
+          --body "chore(release): ${{ steps.version.outputs.VERSION }}" \
+          --base master \
+          --head release/${{ steps.version.outputs.VERSION }} \
+          --label release
