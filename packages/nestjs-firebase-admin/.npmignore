@@ -4,7 +4,15 @@
 !lib/**/*.d.ts
 lib/**/*.spec.d.ts
 
+.eslintignore
 .eslintrc.js
+.turbo
+.lintstagedrc.json
+coverage
+CHANGELOG.md
+jest.config.mjs
+jest.js.config.mjs
 pnpm-lock.yaml
-tsconfig.dev.json
+prettier.config.js
+README.md
 tsconfig.json
