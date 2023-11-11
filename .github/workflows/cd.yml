@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo ${{ github.ref_name }}
-      
+      - run: echo ${{ github.event.pull_request.head.ref }}
+
   create-repository-release:
     if: github.event.pull_request.merged == true && startsWith(github.ref_name, 'release/')
     runs-on: ubuntu-latest
