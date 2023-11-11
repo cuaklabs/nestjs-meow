@@ -17,13 +17,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Get Version
         id: version
         env:
           BRANCH_NAME: ${{ github.event.pull_request.head.ref  }}
-        run: echo "VERSION=${BRANCH_NAME:9}" >> $GITHUB_OUTPUT
+        run: echo "VERSION=${BRANCH_NAME:8}" >> $GITHUB_OUTPUT
 
-      - name: Create release PR
+      - name: Create repository release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create ${{ steps.version.outputs.VERSION }} --generate-notes
