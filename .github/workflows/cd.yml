@@ -12,21 +12,15 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: echo ${{ github.event.pull_request.head.ref }}
-
   create-repository-release:
-    if: github.event.pull_request.merged == true && startsWith(github.ref_name, 'release/')
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref , 'release/')
     runs-on: ubuntu-latest
 
     steps:
       - name: Get Version
         id: version
         env:
-          BRANCH_NAME: ${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref  }}
         run: echo "VERSION=${BRANCH_NAME:9}" >> $GITHUB_OUTPUT
 
       - name: Create release PR
@@ -36,7 +30,7 @@ jobs:
 
 
   publish-packages:
-    if: github.event.pull_request.merged == true && startsWith(github.ref_name, 'release/')
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref , 'release/')
     runs-on: ubuntu-latest
 
     strategy:
