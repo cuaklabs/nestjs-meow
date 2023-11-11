@@ -12,6 +12,12 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo ${{ github.ref_name }}
+      
   create-repository-release:
     if: github.event.pull_request.merged == true && startsWith(github.ref_name, 'release/')
     runs-on: ubuntu-latest
