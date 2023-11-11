@@ -5,7 +5,7 @@ on:
     types:
       - closed
     branches:
-      - 'release/**'
+      - 'release\/[0-9]+.[0-9]+.[0-9]+'
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
