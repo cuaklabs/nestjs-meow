@@ -18,7 +18,7 @@ jobs:
         node-version: [20.x]
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v3.0.0
@@ -26,7 +26,7 @@ jobs:
           version: latest
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
@@ -46,7 +46,7 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v3.0.0
@@ -54,7 +54,7 @@ jobs:
           version: latest
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
@@ -74,7 +74,7 @@ jobs:
         node-version: [20.x]
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v3.0.0
@@ -82,7 +82,7 @@ jobs:
           version: latest
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
@@ -102,7 +102,7 @@ jobs:
         node-version: [20.x]
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
       
       - name: Setup PNPM
         uses: pnpm/action-setup@v3.0.0
@@ -110,7 +110,7 @@ jobs:
           version: latest
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
@@ -123,6 +123,6 @@ jobs:
         run: pnpm test:js:coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v4.6.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
