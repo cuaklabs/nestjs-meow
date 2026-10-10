@@ -32,8 +32,8 @@
     "@cuaklabs/nestjs-jest-config": "workspace:*",
     "@cuaklabs/nestjs-prettier-config": "workspace:*",
     "@cuaklabs/nestjs-typescript-config": "workspace:*",
-    "husky": "9.1.6",
-    "lint-staged": "15.2.10",
+    "husky": "9.1.7",
+    "lint-staged": "15.5.2",
     "turbo": "1.13.4"
   },
   "standard-version": {
